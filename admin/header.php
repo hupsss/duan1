@@ -113,25 +113,25 @@
                     <nav>
                         <ul class="nav nav-pills nav-ul-1">
                             <li class="nav-item nav-item-1 ">
-                                <a href="/" class="nav-link nav-link-1 tp_menu_item">Trang
+                                <a href="index.php?act=trangchu" class="nav-link nav-link-1 tp_menu_item">Trang
                                     chủ</a></li>
                             <li class="nav-item nav-item-1 ">
-                                <a href="/phong-an-pc381715.html" class="nav-link nav-link-1 tp_menu_item">Danh Mục</a>
+                                <a href="index.php?act=dsdm" class="nav-link nav-link-1 tp_menu_item">Danh Mục</a>
                             </li>
                             <li class="nav-item nav-item-1 ">
-                                <a href="/phong-an-pc381715.html" class="nav-link nav-link-1 tp_menu_item">Sản phẩm</a>
+                                <a href="index.php?act=dssp" class="nav-link nav-link-1 tp_menu_item">Sản phẩm</a>
                             </li>
                             <li class="nav-item nav-item-1 ">
-                                <a href="/phong-ngu-pc381716.html" class="nav-link nav-link-1 tp_menu_item">Tài khoản</a
+                                <a href="index.php?act=dstk" class="nav-link nav-link-1 tp_menu_item">Tài khoản</a
                                 ></li>
                             <li class="nav-item nav-item-1 ">
-                                <a href="/phong-lam-viec-pc381717.html" class="nav-link nav-link-1 tp_menu_item">Bình Luận</a
+                                <a href="index.php?act=dsbl" class="nav-link nav-link-1 tp_menu_item">Bình Luận</a
                                 ></li>
                             <li class="nav-item nav-item-1 ">
-                                <a href="/bep-pc381718.html" class="nav-link nav-link-1 tp_menu_item">Đơn hàng</a>
+                                <a href="index.php?act=dsdh" class="nav-link nav-link-1 tp_menu_item">Đơn hàng</a>
                             </li>
                             <li class="nav-item nav-item-1 ">
-                                <a href="/do-trang-tri-pc381719.html" class="nav-link nav-link-1 tp_menu_item">Thống kê</a>
+                                <a href="index.php?act=thongke" class="nav-link nav-link-1 tp_menu_item">Thống kê</a>
                             </li>
                         </ul>
                     </nav>

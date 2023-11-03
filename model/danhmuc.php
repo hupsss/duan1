@@ -1,5 +1,5 @@
 <?php
-    function categories() {
+    function loadAll_dm() {
         $sql = "SELECT * FROM categories order by category_id desc";
         $result = pdo_query($sql);
         return $result;
