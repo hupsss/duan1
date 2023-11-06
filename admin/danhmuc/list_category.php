@@ -14,12 +14,12 @@
         <h1 class="title" class="h3 mb-2 text-gray-800">Danh Sách Danh Mục</h1>
         <p class="mb-4">Thêm danh mục sản phẩm</a>.</p>
         <a href="index.php?act=adddm">
-            <button type="button" class="btn btn-primary">Thêm Sản Phẩm</button>
+            <button type="button" class="btn btn-primary">Thêm Danh Mục</button>
         </a>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Các Loại Sản Phẩm</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Các Loại Danh Mục</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

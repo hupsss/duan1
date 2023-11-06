@@ -12,19 +12,16 @@
         outline: none;
         padding: 5px 10px;
     }
-    .btn_input:hover {
-        color: lightblue;
-        background-color: coral;
-    }
 </style>
 <div class="container">
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="title" class="h3 mb-2 text-gray-800">Thêm Danh Mục</h1>
-        <form action="index.php?act=adddm" method="post">
+        <h1 class="title" class="h3 mb-2 text-gray-800">Cập Nhập Danh Mục</h1>
+        <form action="index.php?act=updatedm" method="post">
             <div class="form-group">
                 <label for="disabledTextInput">Tên Danh Mục</label>
-                <input type="text" id="disabledTextInput" class="form-control" name="category_name" placeholder="Nhập Tên Sản Phẩm">
+                <input type="hidden" name="category_id" value="<?= $kq['category_id']?>">
+                <input type="text" id="disabledTextInput" class="form-control" name="category_name" value="<?= $kq['category_name']?>"  placeholder="Nhập Tên Sản Phẩm">
             </div>
             <?php 
                 if(isset($tb) && ($tb != "")) {
@@ -33,7 +30,7 @@
                     ";
                 }
             ?> 
-            <input class="btn_input" type="submit" name="submit" value="Thêm Danh Mục">
+            <input class="btn_input" type="submit" name="submit" value="Cập Nhập Danh Mục">
             <a href="index.php?act=dsdm">Danh Sách</a>
         </form>
     </div>

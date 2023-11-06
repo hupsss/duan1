@@ -1,7 +1,7 @@
 <?php
-function product()
+function loadAll_sp()
 {
-    $sql = "SELECT product_id, product_name,price,discount,image,descripsion, category_name FROM product JOIN categories on id_category = category_id order by product_id desc";
+    $sql = "SELECT product_id, product_name,price,discount,image,descripsion,view, category_name FROM product JOIN categories on id_category = category_id order by product_id desc";
     $result = pdo_query($sql);
     return $result;
 }
@@ -29,7 +29,7 @@ function view($id)
 
 function add_product($product_name, $price, $discount, $image, $descripsion, $id_category)
 {
-    $sql = "INSERT INTO product(product_name,price,discount,image,ngayNhap,descripsion,id_category) 
+    $sql = "INSERT INTO product(product_name,price,discount,image,dateAdd,descripsion,id_category) 
                 VALUES('$product_name','$price','$discount','$image',NOW(),'$descripsion','$id_category')";
     pdo_execute($sql);
 }

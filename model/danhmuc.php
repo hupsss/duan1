@@ -40,4 +40,9 @@
         $result = pdo_query_one($sql);
         return $result;
     }
+    function check_category($category_name) {
+        $sql = "SELECT category_name FROM categories WHERE category_name = '$category_name'";
+        $result = pdo_query($sql);
+        return $result;
+    }
 ?>
