@@ -52,8 +52,6 @@
                   $id_category = $_GET['id'];
                   if (dele_category($id_category)) {
                     $tt = "Xóa Thành Công";
-                  } else {
-                    $tt = "Không Tồn Tại";
                   }
                 }
                 $dsdm = loadAll_dm();
@@ -73,7 +71,7 @@
                   $id_category = $_POST['id_category'];
                   $photo = null;
                   
-              
+                  
                   // Kiểm tra xem có dữ liệu nào bị để trống không
                   if (empty($product_name) || empty($price) || empty($descripsion) || empty($id_category)) {
                         $tt = "Vui lòng điền đầy đủ thông tin trước khi submit.";
@@ -94,49 +92,51 @@
                 $dsdm = loadAll_dm();
                 include "sanpham/add_product.php";
                 break;
-                case "editsp":
-
-                    $dsdm = loadAll_dm();
-      
-                    if (isset($_GET['id']) && ($_GET['id'])) {
-                      $id = $_GET['id'];
-                      $kq = edit_product($id);
-                    }
-                    if (isset($_POST['submit']) && ($_POST['submit'])) {
-                        $id = $_POST['product_id'];
-                        $product_name = $_POST['product_name'];
-                        $price = $_POST['price'];
-                        $discount = $_POST['discount'];
-                        $descripsion = $_POST['descripsion'];
-                        $id_category = $_POST['id_category'];
-                        $photo = null;
-                        $tb = "<div style='color:green'>Cập nhập thành công Thành Công</div>";
-                        $image = $_POST['image']; // tên ảnh cũ
-
-                      if ($_FILES['image']['name'] != "") {
-      
+            case "editsp":
+                if (isset($_GET['id']) && ($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $kq = edit_product($id);
+                }
+                $dsdm = loadAll_dm();
+                include "sanpham/edit_product.php";
+                break;
+            case "updatesp":
+                if (isset($_POST['submit']) && ($_POST['submit'])) {
+                    $id = $_POST['product_id'];
+                    $product_name = $_POST['product_name'];
+                    $price = $_POST['price'];
+                    $discount = $_POST['discount'];
+                    $descripsion = $_POST['descripsion'];
+                    $id_category = $_POST['id_category'];
+                    $photo = null;
+                    $tb = "<div style='color:green'>Cập nhập thành công Thành Công</div>";
+                    $image = '';
+                    if ($_FILES['image']['name'] != "") {
+    
                         $file = $_FILES['image'];
                         //lấy tên file
                         $image = $file['name'];
                         $photo = time() . "-" . $_FILES['image']['name'];
                         move_uploaded_file($file['tmp_name'], "./upload/" . $image);
-                      }
-      
-                      update_product($id, $product_name, $price, $discount, $image, $descripsion, $id_category);
-                    //   header("location: index.php?act=dssp");
-                    //   $dssp = loadAll_sp();
-                    //   include 'danhmuc/list_category.php';
                     }
-                    include "sanpham/edit_product.php";
-                    break;
-                  case "delesp":
-                    if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                      $id = $_GET['id'];
-                      dele_product($id);
-                    }
-                    $dssp = loadAll_sp();
-                    include "sanpham/list_product.php";
-                    break;
+  
+                  update_product($id, $product_name, $price, $discount, $image, $descripsion, $id_category);
+                //   header("location: index.php?act=dssp");
+                //   $dssp = loadAll_sp();
+                //   include 'danhmuc/list_category.php';
+
+                }
+                $dssp = loadAll_sp();
+                include "sanpham/list_product.php";
+                break;
+              case "delesp":
+                if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                  $id = $_GET['id'];
+                  dele_product($id);
+                }
+                $dssp = loadAll_sp();
+                include "sanpham/list_product.php";
+                break;
             default:
                 include "main.php";
                 break;

@@ -28,7 +28,7 @@
         <h1>Thêm Sản Phẩm</h1>
     </div>
     <div class="form-add">
-        <form action="index.php?act=editsp" method="post" enctype="multipart/form-data">
+        <form action="index.php?act=updatesp" method="post" enctype="multipart/form-data">
         <div class="input-group flex-nowrap">
 
             <input type="hidden" name="product_id" value="<?= $kq['product_id'] ?>" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
