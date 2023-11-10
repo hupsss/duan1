@@ -4,6 +4,8 @@
         $result = pdo_query($sql);
         return $result;
     }
+    
+    
     function add_category($category_name) {
         $sql = "INSERT INTO categories(category_name) VALUES('$category_name')";
         $result = pdo_execute($sql);

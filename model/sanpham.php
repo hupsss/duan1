@@ -7,7 +7,17 @@ function loadAll_sp()
 }
 function product_home()
 {
-    $sql = "SELECT product_id, product_name,price,discount,image,descripsion, category_name FROM product JOIN categories on id_category = category_id where 1 order by product_id desc limit 0,9";
+    $sql = "SELECT product_id, product_name,price,discount,image,descripsion, category_name FROM product JOIN categories on id_category = category_id where 1 order by product_id desc limit 0,6";
+    $result = pdo_query($sql);
+    return $result;
+}
+function loadOne_dm($id) {
+    $sql = "SELECT product_id, product_name,price,discount,image,descripsion,view, category_name FROM product JOIN categories on id_category = category_id where product_id = '$id'";
+    $result = pdo_query_one($sql);
+    return $result;
+}
+function sanphamDB() {
+    $sql = "SELECT * FROM product ";
     $result = pdo_query($sql);
     return $result;
 }

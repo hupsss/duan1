@@ -107,12 +107,49 @@
     <script defer type="text/javascript" src="https://web.nvnstatic.net/tp/T0444/js/index.js?v=2"></script>
     <!-- main -->
     <?php
-        $dssp = loadAll_sp();
+        $dssp = product_home();
         $dsdm = loadAll_dm();
+        $spdb =  sanphamDB();
         if(isset($_GET['act']) && ($_GET['act'] != "")) {
             $act =  $_GET['act'];
             switch($act) {
                 case  "trangchu" :
+                    include "users/main.php";
+                    break;
+                case "phongan":
+                    include "users/phongan.php";
+                    break;
+                case "phongngu":
+                    include "users/phongngu.php";
+                    break;
+                case "phonglamviec":
+                    include "users/phonglamviec.php";
+                    break;
+                case "bep":
+                    include "users/bep.php";
+                    break;
+                case "dotrangtri":
+                    include "users/dotrangtri.php";
+                    break;
+                case "tintuc":
+                    include "users/tintuc.php";
+                    break;
+                case "lienhe":
+                    include "users/lienhe.php";
+                    break;
+                case "chitiet":
+                    if(isset($_GET['id']) && ($_GET['id']>0)) {
+                        $id = $_GET['id'];
+                        view($id);
+                        $ctsp = edit_product_ct($id);
+                        extract($ctsp);
+                        $spcl = edit_product_cl($id,$id_category);
+                        $dmct = loadOne_dm($id);
+                       
+                    }
+                    include "users/chitiet.php";
+                    break;
+                default:
                     include "users/main.php";
                     break;
             }
