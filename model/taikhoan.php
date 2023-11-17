@@ -1,5 +1,5 @@
 <?php
-    function account() {
+    function loadAll_account() {
         $sql = "SELECT * FROM account order by account_id desc";
         $result = pdo_query($sql);
         return $result;

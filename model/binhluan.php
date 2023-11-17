@@ -9,9 +9,10 @@
             if($id_product > 0) {
                 $sql .= " AND id_product = '".$id_product."'";
             }
-    $sql .= "order by comment_id desc";
-        $result = pdo_query($sql);
-        return $result;
+        $sql .= "order by comment_id desc";
+            $result = pdo_query($sql);
+            return $result;
+        
     }
     function dele_comment($comment_id) {
         $sql = "DELETE FROM comment WHERE comment_id = $comment_id";

@@ -46,9 +46,9 @@
                             <div class="header-control-user-content col-9">
                                 <div class="header-control-user-content-top">Tài khoản</div>
                                 <div class="header-control-user-content-bottom">
-                                    <a href="/user/signin">Đăng nhập</a>
+                                    <a href="?act=dangnhap">Đăng nhập</a>
                                     <span>*</span>
-                                    <a href="/user/signup">Đăng ký</a>
+                                    <a href="?act=dangky">Đăng ký</a>
                                 </div>
                             </div>
                         </div>
@@ -78,30 +78,23 @@
             <div class="container">
                 <nav>
                     <ul class="nav nav-pills nav-ul-1">
+                       
                         <li class="nav-item nav-item-1 ">
-                            <a href="index.php?act=trangchu" class="nav-link nav-link-1 tp_menu_item">Trangchủ</a>
+                            <a href="index.php?act=trangchu" class="nav-link nav-link-1 tp_menu_item">Trang Chủ</a>
+                        </li>
+                        
+                        <?php foreach($dsdm as $dm) : ?>
+                        <li class="nav-item nav-item-1 ">
+                            <a href="?act=timkiemdm&category_id=<?= $dm['category_id']?>" class="nav-link nav-link-1 tp_menu_item"><?= $dm['category_name']?></a>
+                        </li>
+                        <?php endforeach?>
+                        <li class="nav-item nav-item-1 ">
+                            <a href="?act=lienhe" class="nav-link nav-link-1 tp_menu_item">Liên Hệ</a>
                         </li>
                         <li class="nav-item nav-item-1 ">
-                            <a href="index.php?act=phongan" class="nav-link nav-link-1 tp_menu_item">Phòng ăn</a>
+                            <a href="?act=tintuc" class="nav-link nav-link-1 tp_menu_item">Tin Tức</a>
                         </li>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=phongngu" class="nav-link nav-link-1 tp_menu_item">Phòng ngủ</a>
-                        </li>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=phonglamviec" class="nav-link nav-link-1 tp_menu_item">Phòng làm việc</a>
-                        </li>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=bep" class="nav-link nav-link-1 tp_menu_item">Bếp</a>
-                        </li>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=dotrangtri" class="nav-link nav-link-1 tp_menu_item">Đồ trang trí</a>
-                        </li>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=tintuc" class="nav-link nav-link-1 tp_menu_item">Tin tức</a>
-                        </li>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=lienhe" class="nav-link nav-link-1 tp_menu_item">Liên hệ</a>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>

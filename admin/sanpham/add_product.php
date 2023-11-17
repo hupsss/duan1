@@ -52,6 +52,22 @@
                 <textarea class="form-control" name="descripsion" aria-label="With textarea" placeholder="Mô Tả Sản Phẩm"></textarea>
             </div>
             <br>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Size</span>
+                <input type="text" name="size" class="form-control" placeholder="Kích cỡ" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Color</span>
+                <input type="text" name="color" class="form-control" placeholder="Màu sắc" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Material</span>
+                <input type="text" name="material" class="form-control" placeholder="Chất liệu" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Special</span>
+                <input type="number" name="special" min="0" class="form-control" placeholder="Chất liệu" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
             <select class="custom-select my-1 mr-sm-2" name="id_category" id="inlineFormCustomSelectPref">
                 <?php foreach ($dsdm as $dm) : ?>
                     <option value="<?= $dm['category_id'] ?>">

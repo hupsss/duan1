@@ -134,7 +134,7 @@
                 <div class="index-product-box-header margin-bottom-lg-30">
                     <h5 class="index-product-box-label position-relative">
                         <a href="/product?show=bestseller" class="tp_title position-relative tp_title">
-                            Sản phẩm được ưa thích </a>
+                            Sản phẩm Đặc biệt </a>
                     </h5>
                 </div>
                 <div class="index-product-box-list index-new-product-box row">
@@ -239,9 +239,9 @@
                 <div class="index-product-box-header position-relative margin-bottom-lg-30">
                     <h5 class="index-product-box-label position-relative">
                         <a href="javascript:void(0);" class="tp_title position-relative tp_title">
-                            Sản phẩm đáng chú ý </a>
+                            Top 6 sản phẩm </a>
                     </h5>
-                    <div class="index-product-tab-list">
+                    <!-- <div class="index-product-tab-list">
                         <div class="group-tab">
                             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item">
@@ -258,16 +258,17 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="index-product-tab-box index-product-tab-show-box">
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="index-home-product-tab-block" role="tabpanel" aria-labelledby="index-home-product-tab">
                             <div class="index-product-tab-block index-home-product-tab-block owl-carousel">
+                                <?php foreach($top10sp as $sptop) : ?>
                                 <div class="product-box" data-psId="18810315">
                                     <div class="product-img position-relative">
-                                        <a href="/ke-sach-freestyle-p18810315.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_yaRhXiMctQYqGGSZrZC6XYIX.jpg" alt="Kệ sách FreeStyle">
+                                        <a href="?act=chitiet&id=<?= $sptop['product_id']?>">
+                                            <img data-sizes="auto" class="lazyload" src="admin/upload/<?= $sptop['image']?>"  alt="<?= $sptop['product_name']?>">
                                         </a>
                                     </div>
                                     <div class="product-info">
@@ -275,163 +276,19 @@
                                             <p id="voteView0" class="si ic voteView"></p>
                                         </div>
                                         <h6 class="product-name text-center">
-                                            <a href="/ke-sach-freestyle-p18810315.html" class="tp_product_name">Kệ
-                                                sách FreeStyle</a>
+                                            <a href="?act=chitiet&id=<?= $sptop['product_id']?>" class="tp_product_name"><?= $sptop['product_name']?></a>
                                         </h6>
                                         <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">6.490.000₫</div>
+                                            <div class="product-price tp_product_price"><?= number_format($sptop['price'])?></div>
                                         </div>
                                         <div class="product-action text-center">
-                                            <a href="/ke-sach-freestyle-p18810315.html" class="btn button-hover-line tp_button">
+                                            <a href="?act=chitiet&id=<?= $sptop['product_id']?>" class="btn button-hover-line tp_button">
                                                 <span>Tùy chọn</span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-box" data-psId="18810311">
-                                    <div class="product-img position-relative">
-                                        <a href="/bo-ban-an-stefano-p18810311.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_EV8QvVWDpe5YNfvcxCjTnYiw.jpg" alt="Bộ bàn ăn Stefano">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating text-center">
-                                            <p id="voteView0" class="si ic voteView"></p>
-                                        </div>
-                                        <h6 class="product-name text-center">
-                                            <a href="/bo-ban-an-stefano-p18810311.html" class="tp_product_name">Bộ
-                                                bàn ăn Stefano</a>
-                                        </h6>
-                                        <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">14.950.000₫</div>
-                                        </div>
-                                        <div class="product-action text-center">
-                                            <a href="/bo-ban-an-stefano-p18810311.html" class="btn button-hover-line tp_button">
-                                                <span>Tùy chọn</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-box" data-psId="18810310">
-                                    <div class="product-img position-relative">
-                                        <a href="/bo-ban-an-marryland-p18810310.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_OxHDpUfye1Zs1AeSFMrKJKor.jpg" alt="Bộ bàn ăn Marryland">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating text-center">
-                                            <p id="voteView0" class="si ic voteView"></p>
-                                        </div>
-                                        <h6 class="product-name text-center">
-                                            <a href="/bo-ban-an-marryland-p18810310.html" class="tp_product_name">Bộ
-                                                bàn ăn Marryland</a>
-                                        </h6>
-                                        <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">3.990.000₫</div>
-                                        </div>
-                                        <div class="product-action text-center">
-                                            <a href="/bo-ban-an-marryland-p18810310.html" class="btn button-hover-line tp_button">
-                                                <span>Tùy chọn</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-box" data-psId="18810309">
-                                    <div class="product-img position-relative">
-                                        <a href="/bo-ban-an-edward-p18810309.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_0fH2LceuN65oSeiHO3KDYl8i.jpg" alt="Bộ bàn ăn Edward">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating text-center">
-                                            <p id="voteView0" class="si ic voteView"></p>
-                                        </div>
-                                        <h6 class="product-name text-center">
-                                            <a href="/bo-ban-an-edward-p18810309.html" class="tp_product_name">Bộ
-                                                bàn ăn Edward</a>
-                                        </h6>
-                                        <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">1.290.000₫</div>
-                                        </div>
-                                        <div class="product-action text-center">
-                                            <a href="/bo-ban-an-edward-p18810309.html" class="btn button-hover-line tp_button">
-                                                <span>Tùy chọn</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-box" data-psId="18810306">
-                                    <div class="product-img position-relative">
-                                        <a href="/ban-cafe-cabaret-p18810306.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_a2maE7EjvjNSPdXrLHezkNyE.jpg" alt="Bàn cafe Cabaret">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating text-center">
-                                            <p id="voteView0" class="si ic voteView"></p>
-                                        </div>
-                                        <h6 class="product-name text-center">
-                                            <a href="/ban-cafe-cabaret-p18810306.html" class="tp_product_name">Bàn
-                                                cafe Cabaret</a>
-                                        </h6>
-                                        <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">1.390.000₫</div>
-                                        </div>
-                                        <div class="product-action text-center">
-                                            <a href="/ban-cafe-cabaret-p18810306.html" class="btn button-hover-line tp_button">
-                                                <span>Tùy chọn</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-box" data-psId="18810305">
-                                    <div class="product-img position-relative">
-                                        <a href="/ghe-banh-bogart-p18810305.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_8xRZRfIDuSeSdGIhdcfGcSCT.jpg" alt="Ghế bành Bogart">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating text-center">
-                                            <p id="voteView0" class="si ic voteView"></p>
-                                        </div>
-                                        <h6 class="product-name text-center">
-                                            <a href="/ghe-banh-bogart-p18810305.html" class="tp_product_name">Ghế
-                                                bành Bogart</a>
-                                        </h6>
-                                        <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">5.490.000₫</div>
-                                        </div>
-                                        <div class="product-action text-center">
-                                            <a href="/ghe-banh-bogart-p18810305.html" class="btn button-hover-line tp_button">
-                                                <span>Tùy chọn</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-box" data-psId="18810304">
-                                    <div class="product-img position-relative">
-                                        <a href="/ghe-banh-connemara-p18810304.html">
-                                            <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/tp/T0444/img/blank.png?v=3" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_ZJSXJafMa01wdpgrWQrJvIwU.jpg" alt="Ghế bành Connemara">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating text-center">
-                                            <p id="voteView0" class="si ic voteView"></p>
-                                        </div>
-                                        <h6 class="product-name text-center">
-                                            <a href="/ghe-banh-connemara-p18810304.html" class="tp_product_name">Ghế
-                                                bành Connemara</a>
-                                        </h6>
-                                        <div class="product-price-box text-center">
-                                            <div class="product-price tp_product_price">7.490.000₫</div>
-                                        </div>
-                                        <div class="product-action text-center">
-                                            <a href="/ghe-banh-connemara-p18810304.html" class="btn button-hover-line tp_button">
-                                                <span>Tùy chọn</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endforeach?>
                             </div>
                         </div>
                         <div class="tab-pane fade show" id="index-new-product-tab-block" role="tabpanel" aria-labelledby="index-new-product-tab">
@@ -788,7 +645,7 @@
             </div>
         </div>
     </div>
-    <div class="index-product-tab-category padding-lg-30 tp_product_category_box">
+    <!-- <div class="index-product-tab-category padding-lg-30 tp_product_category_box">
         <div class="container">
             <div class="row">
                 <div class="index-product-box-header position-relative margin-bottom-lg-30">
@@ -1318,7 +1175,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <style>
         .index-feedback {
             background: url('') no-repeat center center;

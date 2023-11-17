@@ -1,13 +1,12 @@
+
 <section class="section-pview">
     <div class="site-breadcrumb">
         <div class="container">
             <div class="row">
                 <div class="breadcrumb-block">
-                    <a href="/" class="breadcrumb-link">Trang chủ</a>
+                    <a href="?act=trangchu" class="breadcrumb-link">Trang chủ</a>
                     <span class="breadcrumb-icon">>></span>
-                    <a href="/phong-an-pc381715.html" class="breadcrumb-link">Phòng ăn</a>
-                    <span class="breadcrumb-icon">>></span>
-                    <span class="breadcrumb-item">Bộ bàn ăn Stefano</span>
+                    <span class="breadcrumb-item"><?= $ctsp['product_name'] ?></span>
                 </div>
             </div>
         </div>
@@ -99,6 +98,10 @@
                         </div>
                     </div>
                     <div class="pview-control-button col-12 padding-0">
+                        
+                        <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
+                            <span>Thêm vào giỏ hàng</span>
+                        </a>
                         <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
                             <span>Mua hàng</span>
                         </a>
@@ -137,13 +140,24 @@
     </div>
     <div class="pview-faq padding-lg-30">
         <div class="container">
-            <div class="row">
+            <div class="row" style="display: block !important;">
                 <div class="index-product-box-header margin-bottom-lg-30 col-12">
                     <h5 class="index-product-box-label position-relative">
-                        <a href="javascript:void(0);" class="tp_title position-relative">Hỏi & Đáp</a>
+                        <a href="javascript:void(0);" class="tp_title position-relative">Bình Luận</a>
                     </h5>
                 </div>
-                <div class="pview-faq-box fb-comments" data-href="http://t0444.store.nhanh.vn/bo-ban-an-stefano-p18810311.html" data-numposts="5" data-colorscheme="light"></div>
+                <div class="pview-faq-box fb-comments" data-href="http://t0444.store.nhanh.vn/bo-ban-an-stefano-p18810311.html" data-numposts="5" data-colorscheme="light">
+                    <div class="container-comment">
+                        <div class="comment-form">
+                            <textarea placeholder="Write your comment here..."></textarea>
+                            <button onclick="postComment()">Gửi bình luận</button>
+                        </div>
+
+                        <ul class="comments" id="comments-list">
+                            <!-- Comments will be dynamically added here using JavaScript -->
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -160,7 +174,7 @@
                     <?php foreach ($spcl as $sp) : ?>
                         <div class="product-box" data-psId="18810311">
                             <div class="product-img position-relative">
-                                <a href="?act=chitiet&id<?= $sp['product_id'] ?>">
+                                <a href="?act=chitiet&id=<?= $sp['product_id'] ?>">
                                     <img data-sizes="auto" class="lazyload" src="admin/upload/<?= $sp['image'] ?>" data-src="admin/upload/<?= $sp['image'] ?>" alt="<?= $sp['product_name'] ?>">
                                 </a>
                             </div>
@@ -169,13 +183,13 @@
                                     <p id="voteView0" class="si ic voteView"></p>
                                 </div>
                                 <h6 class="product-name text-center">
-                                    <a href="?act=chitiet&id<?= $sp['product_id'] ?>" class="tp_product_name"><?= $sp['product_name'] ?></a>
+                                    <a href="?act=chitiet&id=<?= $sp['product_id'] ?>" class="tp_product_name"><?= $sp['product_name'] ?></a>
                                 </h6>
                                 <div class="product-price-box text-center">
                                     <div class="product-price tp_product_price"><?= number_format($sp['price']) ?></div>
                                 </div>
                                 <div class="product-action text-center">
-                                    <a href="?act=chitiet&id<?= $sp['product_id'] ?>" class="btn button-hover-line tp_button">
+                                    <a href="?act=chitiet&id=<?= $sp['product_id'] ?>" class="btn button-hover-line tp_button">
                                         <span>Tùy chọn</span>
                                     </a>
                                 </div>

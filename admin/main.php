@@ -1,12 +1,19 @@
+<style>
+    .char-main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 <section class="section-index">
-
-    <div class="index-privacy padding-lg-30">
+    <div class="char-main" >
         <div class="col-md-8">
             <canvas id="myChart"></canvas>
+            <div><br><br></div>
             <canvas class="mt-5" id="myChart2"></canvas>
         </div>
     </div>
 </section>
 <script>
-    var data1 = [11,32,14,42]
+    const data1 = [10, 20, 30, 40, 50]
 </script>

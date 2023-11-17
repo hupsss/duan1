@@ -51,7 +51,23 @@
         </div>
         <div style="width: 80px;">
             <img src="upload/<?= $kq['image'] ?>" width="80px" height="80px" alt="">
-        </div>    
+        </div>
+        <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Size</span>
+                <input type="text" name="size" value="<?= $kq['size']?>" class="form-control" placeholder="Kích cỡ" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Color</span>
+                <input type="text" name="color" value="<?= $kq['color']?>" class="form-control" placeholder="Màu sắc" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Material</span>
+                <input type="text" name="material" value="<?= $kq['material']?>" class="form-control" placeholder="Chất liệu" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Special</span>
+                <input type="number" name="special" min="0" value="<?= $kq['special']?>" class="form-control" placeholder="Chất liệu" aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
         <div class="input-group">
             <span class="input-group-text">descripsion</span>
             <textarea class="form-control" name="descripsion" aria-label="With textarea"><?= $kq['descripsion'] ?></textarea>

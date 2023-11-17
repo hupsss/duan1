@@ -32,6 +32,10 @@
                                 <th>Giảm Giá</th>
                                 <th>Hình Ảnh</th>
                                 <th>Mô Tả</th>
+                                <th>Màu sắc</th>
+                                <th>Kích cỡ</th>
+                                <th>Chât liệu</th>
+                                <th>Đặc biệt</th>
                                 <th>Tên Danh Mục</th>
                                 <th>Lượt Xem</th>
                                 <th>Thêm</th>
@@ -48,6 +52,10 @@
                                         <img src="upload/<?= $sp['image']?>" alt="" width="50px">
                                     </td>
                                     <td><?= $sp['descripsion'] ?></td>
+                                    <td><?= $sp['size'] ?></td>
+                                    <td><?= $sp['color'] ?></td>
+                                    <td><?= $sp['material'] ?></td>
+                                    <td><?= $sp['special'] ?></td>
                                     <td><?= $sp['category_name'] ?></td>
                                     <td><?= $sp['view'] ?></td>
                                     <td>

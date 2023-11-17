@@ -6,7 +6,12 @@ const ctx = document.getElementById("myChart");
             labels: ["Bình luận", "Sản phẩm", "Khách hàng", "Danh Mục", ],
             datasets: [{
                 label: "Thống kê chung cửa hàng",
-                data: data1,
+                data: [
+                    11,
+                    12,
+                    13,
+                    14
+                ],
                 borderWidth: 1,
                 backgroundColor: [
                     "rgb(255, 99, 132)",
@@ -33,7 +38,13 @@ const ctx = document.getElementById("myChart");
             labels: ["Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8"],
             datasets: [{
                 label: "Doanh số cửa hàng 5 tháng gần nhất",
-                data: data1,
+                data:  [
+                    11,
+                    9,
+                    13,
+                    5,
+                    17
+                ],
                 borderWidth: 2,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.1,

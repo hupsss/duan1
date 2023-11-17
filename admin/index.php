@@ -68,6 +68,10 @@
                   $price = $_POST['price'];
                   $discount = $_POST['discount'];
                   $descripsion = $_POST['descripsion'];
+                  $size = $_POST['size'];
+                  $color = $_POST['color'];
+                  $material = $_POST['material'];
+                  $special = $_POST['special'];
                   $id_category = $_POST['id_category'];
                   $photo = null;
                   
@@ -76,6 +80,9 @@
                   if (empty($product_name) || empty($price) || empty($descripsion) || empty($id_category)) {
                         $tt = "Vui lòng điền đầy đủ thông tin trước khi submit.";
                   } else {
+                    if ($special === '' || $special === null) {
+                        $special = 0;
+                    }
                     $tb = "<div style='color:green'>Thêm Thành Công</div>";
                       if ($_FILES['image']['name'] != "") {
                           $file = $_FILES['image'];
@@ -85,7 +92,7 @@
                           move_uploaded_file($file['tmp_name'], "./upload/" . $image);
                       }
               
-                      add_product($product_name, $price, $discount, $image, $descripsion, $id_category);
+                      add_product($product_name, $price, $discount, $image, $descripsion,$size,$color,$material,$special, $id_category);
                     //   header("location: index.php?act=dssp");
                   }
               }
@@ -107,6 +114,12 @@
                     $price = $_POST['price'];
                     $discount = $_POST['discount'];
                     $descripsion = $_POST['descripsion'];
+                    //Mới thêm
+                    $size = $_POST['size'];
+                    $color = $_POST['color'];
+                    $material = $_POST['material'];
+                    $special = $_POST['special'];
+
                     $id_category = $_POST['id_category'];
                     $photo = null;
                     $tb = "<div style='color:green'>Cập nhập thành công Thành Công</div>";
@@ -120,7 +133,7 @@
                         move_uploaded_file($file['tmp_name'], "./upload/" . $image);
                     }
   
-                  update_product($id, $product_name, $price, $discount, $image, $descripsion, $id_category);
+                     update_product($id, $product_name, $price, $discount, $image, $descripsion,$size,$color,$material,$special, $id_category);
                 //   header("location: index.php?act=dssp");
                 //   $dssp = loadAll_sp();
                 //   include 'danhmuc/list_category.php';
@@ -147,4 +160,3 @@
     
     include "footer.php";
 ?>
-<script src="../assets/admin.js"></script>

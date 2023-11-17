@@ -19,6 +19,12 @@ create table product(
     id_category int not null,
     foreign key (id_category) references categories(category_id)
 );
+ALTER TABLE product
+ADD size VARCHAR(255);
+ALTER TABLE product
+ADD size VARCHAR(255);
+ALTER TABLE product
+ADD material VARCHAR(255);
 
 create table account(
 	account_id int auto_increment  primary key,
@@ -59,20 +65,4 @@ create table order_detail(
     last_updated int(11) NOT NULL,
     foreign key (id_order) references ordor(order_id),
     foreign key (id_product) references product(product_id)
-);
-create table properties(
-	property_id  int auto_increment primary key,
-    property_name varchar(50) not null
-);
-create table valueProperty(
-	valueProperty_id int auto_increment primary key,
-    valueProperty_name varchar(50) not null,
-    id_property int not null,
-    foreign key (id_property) references properties(property_id)
-);
-create table propertyProduct(
-	id_product  int not null,
-    id_valueProperty int not null,
-    foreign key (id_product) references product(product_id),
-    foreign key (id_valueProperty) references valueProperty(valueProperty_id)
 );
