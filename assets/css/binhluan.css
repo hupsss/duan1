@@ -81,3 +81,6 @@ h1 {
 .comment .actions button.delete {
     background-color: #e74c3c;
 }
+.edit-comment-input {
+    display: none;
+}

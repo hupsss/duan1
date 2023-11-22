@@ -5,14 +5,38 @@
         return $result;
     }
 
-    function add_account($user,$passwork,$hoTen,$email){
-        $sql = "INSERT INTO account(user,passwork,hoTen,email) 
-                VALUES('$user','$passwork','$hoTen','$email')";
+    // function add_account($fullName,$password,$email,$tel){
+    //     $sql = "INSERT INTO account(fullName,password,email,tel) 
+    //             VALUES('$fullName','$password','$email','$tel')";
+    //     pdo_execute($sql);
+    // }
+
+    function add_account($fullName, $password, $email, $tel) {
+        // Kiểm tra xem email đã tồn tại chưa
+        $existingEmailCheck = "SELECT * FROM account WHERE email = '".$email."'";
+        
+        $result = pdo_query($existingEmailCheck);
+        // var_dump($result);
+        // die;
+        // Lấy số lượng
+        $count = count($result);
+    
+        // Nếu số lượng lớn hơn 0, email đã tồn tại
+        if ($count > 0 ) {
+            return false; // Email đã tồn tại
+        } else {
+    
+        // Nếu email là duy nhất, tiến hành thêm mới
+        $sql = "INSERT INTO account (fullName, password, email, tel) 
+                VALUES ('$fullName', '$password', '$email', '$tel')";
         pdo_execute($sql);
+    
+        return true; // Thêm mới thành công
+        }
     }
 
-    function Check_user($user,$passwork) {
-        $sql = "SELECT * FROM account WHERE user = '".$user."' AND passwork = '".$passwork."'";
+    function Check_user($email,$password) {
+        $sql = "SELECT * FROM account WHERE email = '".$email."' AND password = '".$password."'";
         $result = pdo_query_one($sql);
         return $result;
     }
@@ -28,9 +52,16 @@
         return $result;
     }
 
-    function update_account($account_id,$hoTen,$user,$email,$passwork,$address,$tel) {
-        $sql = "UPDATE account SET  hoTen = '$hoTen',user='$user' ,email = '$email', 
-                passwork = '$passwork', address = '$address', tel = '$tel' WHERE account_id=$account_id";
+    function update_account($id,$fullName,$email, $image,$address,$tel) {
+        if($image != "" ) {
+            $sql = "UPDATE account 
+                    SET  fullName = '$fullName', email = '$email', image = '$image', address = '$address', tel = '$tel' 
+                    WHERE account_id=$id";
+        } else {
+            $sql = "UPDATE account 
+                    SET  fullName = '$fullName', email = '$email', address = '$address', tel = '$tel' 
+                    WHERE account_id=$id";
+        }
         $result = pdo_execute($sql);
         return $result;
     }
@@ -44,7 +75,7 @@
 
 
     function dele_account($id) {
-        $sql = "DELETE FROM account WHERE account_id=$id";
+        $sql = "DELETE FROM account WHERE account_id=$id AND role = 0";
         $result = pdo_execute($sql);
         return $result;
     }

@@ -23,8 +23,8 @@ include "model/phong.php";
     <meta name="DC.language" content="scheme&#x3D;utf-8&#x20;content&#x3D;vi">
     <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
     <meta name="google-site-verification" content="">
-     <!-- Include jQuery -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Include jQuery UI -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -46,7 +46,7 @@ include "model/phong.php";
     <script defer type="text/javascript" src="https://web.nvnstatic.net/js/lib.js?v=2"></script>
     <script defer type="text/javascript" src="https://web.nvnstatic.net/js/owlCarousel/owl.carousel.min.2.3.4.js?v=2"></script>
 
-    
+
     <style type="text/css"></style>
     <style type="text/css">
         img {
@@ -78,7 +78,7 @@ include "model/phong.php";
     <script src="https://pos.nvnstatic.net/cache/location.vn.js?v=231013_172145" defer></script>
     <script src="https://web.nvnstatic.net/js/lazyLoad/lazysizes.min.js" async></script>
 
-   
+
     <style>
         figure.image {
             clear: both;
@@ -154,6 +154,20 @@ include "model/phong.php";
                 }
                 include "users/chitiet.php";
                 break;
+            case "searchsp":
+                if (isset($_POST['search']) && ($_POST['search'] != "")) {
+                    $search = $_POST['search'];
+                } else {
+                    $search = '';
+                }
+                if (isset($_GET['category_id']) && ($_GET['category_id'] > 0)) {
+                    $id = $_GET['category_id'];
+                } else {
+                    $id = 0;
+                }
+                $dssp = timkiem_dm($id, $search);
+                include "users/sanpham.php";
+                break;
             case "timkiemdm":
                 if (isset($_POST['search']) && ($_POST['search'] != "")) {
                     $search = $_POST['search'];
@@ -167,7 +181,7 @@ include "model/phong.php";
                 } else {
                     $id = 0;
                 }
-                
+
                 $dssp = timkiem_dm($id, $search);
                 $color = getColorFromProduct($id);
                 $size = getSizeFromProduct($id);
@@ -175,13 +189,96 @@ include "model/phong.php";
                 $sanPhamBanChay =  productBanChay();
                 // var_dump($color);
                 // die;
-                include_once "Users/phong.php";
+                include_once "Users/danhsachdanhmuc.php";
                 break;
             case "dangky":
+                if (isset($_POST['dangky']) && ($_POST['dangky'])) {
+                    $fullName = $_POST['fullName'];
+                    $password = $_POST['password'];
+                    $email = $_POST['email'];
+                    $tel = $_POST['tel'];
+
+                    // Kiểm tra nếu có bất kỳ trường nào trống
+                    if (empty($fullName) || empty($password) || empty($email) || empty($tel)) {
+                        $thongBao = "<div style='color:red'>Vui lòng điền đầy đủ thông tin.</div>";
+                    } else {
+                        // Thử thêm tài khoản mới
+                        $result = add_account($fullName, $password, $email, $tel);
+                        // var_dump($result);
+                        // die;    
+                        if ($result) {
+                            $thongBao = "<div style='color:green'>Thêm thành công</div>";
+                        } else {
+                            $thongBao = "<div style='color:red'>Email đã tồn tại</div>";
+                        }
+                    }
+                }
                 include "dangky.php";
                 break;
             case "dangnhap":
+                if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+
+                    // Kiểm tra xem tên đăng nhập và mật khẩu có rỗng không
+                    if (empty($email) || empty($password)) {
+                        $thongBao = "<div style='color:red'>Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu</div>";
+                    } else {
+                        $check_user = Check_user($email, $password);
+                        if (is_array($check_user)) {
+                            $_SESSION['email'] = $check_user;
+                            // Sử dụng đường dẫn tương đối để điều hướng
+                            header("location: " . ($_SESSION['email']['role'] === 1 ? "admin/index.php?act=trangchu" : "index.php?act=trangchu"));
+                        } else {
+                            $thongBao = "<div style='color:red'>Email hoặc tài khoản không hợp lệ. Vui lòng nhập lại</div>";
+                        }
+                    }
+                }
                 include "dangnhap.php";
+                break;
+            case "capnhaptaikhoan":
+                if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                    $id = $_GET['id'];
+                    $kq = edit_account($id);
+                }
+                if (isset($_POST['capnhaptaikhoan']) && ($_POST['capnhaptaikhoan'])) {
+                    $id = $_POST['account_id'];
+                    $fullName = $_POST['fullName'];
+                    $email = $_POST['email'];
+                    $tel = $_POST['tel'];
+                    $address = $_POST['address'];
+
+                    if ($_FILES['image']['name'] != "") {
+
+                        $file = $_FILES['image'];
+                        //lấy tên file
+                        $image = $file['name'];
+                        $photo = time() . "-" . $_FILES['image']['name'];
+                        move_uploaded_file($file['tmp_name'], "admin/upload/" . $image);
+                    }
+                    update_account($id, $fullName, $email, $image, $address, $tel);
+                }
+                include "users/capnhaptaikhoan.php";
+                break;
+
+            case "quenmatkhau":
+                if (isset($_POST['quenmatkhau']) && ($_POST['quenmatkhau'])) {
+                    $email = $_POST['email'];
+
+                    $check_email = Check_email($email);
+
+                    if (is_array($check_email)) {
+                        $thongBao_mk = "<div style='color:red'>mật khẩu của bạn là '" . $check_email['password'] . "'</div>";
+                    } else {
+                        $thongBao_mk = "<div style='color:red'>Email không tồn tại</div>";
+                    }
+                }
+                include "dangnhap.php";
+                break;
+            case "dangxuat":
+                session_destroy();
+                header("location: index.php?act=trangchu");
+                include "users/main.php";
                 break;
             default:
                 include "users/main.php";
@@ -225,11 +322,14 @@ include "model/phong.php";
 </body>
 
 <script>
-   $(document).ready(function () {
+    $(document).ready(function() {
         filter_data();
-        
-        function  filter_data() {
+
+        function filter_data() {
             var action = 'action';
+            var currentURL = window.location.search;
+            const urlParams = new URLSearchParams(currentURL);
+            const category_id = urlParams.get('category_id');
             var minimun_price = $('#hidden_minimum_price').val();
             var maximun_price = $('#hidden_maximum_price').val();
             var color = get_filter('color');
@@ -239,14 +339,16 @@ include "model/phong.php";
             $.ajax({
                 url: "users/get_data.php",
                 type: "POST",
-                
+
                 data: {
-                    action:action,
-                    minimun_price:minimun_price,
-                    maximun_price:maximun_price,
-                    color:color,
-                    size:size,
-                    material:material
+                    action: action,
+
+                    minimun_price: minimun_price,
+                    maximun_price: maximun_price,
+                    category_id: category_id,
+                    color: color,
+                    size: size,
+                    material: material
                 },
                 success: function(data) {
                     $('.pagination').html(data);
@@ -258,7 +360,7 @@ include "model/phong.php";
 
         function get_filter(class_name) {
             var filter = [];
-            $('.'+class_name+':checked').each(function() {
+            $('.' + class_name + ':checked').each(function() {
                 filter.push($(this).val());
             });
             return filter;
@@ -273,9 +375,9 @@ include "model/phong.php";
             min: 10000,
             max: 10000000,
             values: [10000, 10000000],
-            step:10000,
-            stop: function(event,ui) {
-                $('#price-show').html('Từ: '+ ui.values[0] + ' - ' +ui.values[1]);
+            step: 10000,
+            stop: function(event, ui) {
+                $('#price-show').html('Từ: ' + ui.values[0] + ' - ' + ui.values[1]);
                 $('#hidden_minimum_price').val(ui.values[0]);
                 $('#hidden_maximum_price').val(ui.values[1]);
                 filter_data();
@@ -283,82 +385,4 @@ include "model/phong.php";
         });
     });
 </script>
-<script>
-        function postComment() {
-            var commentText = document.querySelector('.comment-form textarea').value;
-            var commentsList = document.getElementById('comments-list');
-
-            if (commentText.trim() !== '') {
-                var commentElement = document.createElement('li');
-                commentElement.className = 'comment';
-
-                // User Info
-                var userInfo = document.createElement('div');
-                userInfo.className = 'user-info';
-
-                // User Image
-                var userImage = document.createElement('img');
-                userImage.src = 'path_to_user_image.jpg'; // Replace with the actual path to the user's image
-                userImage.alt = 'User Image';
-
-                // User Name
-                var username = document.createElement('div');
-                username.className = 'username';
-                username.textContent = 'John Doe'; // Replace with the actual username
-
-                // Append user image and name to user info
-                userInfo.appendChild(userImage);
-                userInfo.appendChild(username);
-
-                // Comment Text
-                var commentTextElement = document.createElement('div');
-                commentTextElement.className = 'comment-text';
-                commentTextElement.textContent = commentText;
-
-                // Comment Date
-                var commentDate = document.createElement('div');
-                commentDate.className = 'comment-date';
-                commentDate.textContent = new Date().toLocaleString(); // Use the actual date logic
-
-                // Actions (Edit and Delete)
-                var actions = document.createElement('div');
-                actions.className = 'actions';
-
-                var editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
-                editButton.onclick = function () {
-                    // Add your edit logic here
-                    alert('Edit comment: ' + commentText);
-                };
-
-                var deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.className = 'delete';
-                deleteButton.onclick = function () {
-                    // Add your delete logic here
-                    commentElement.remove();
-                };
-
-                // Append actions buttons to actions div
-                actions.appendChild(editButton);
-                actions.appendChild(deleteButton);
-
-                // Append all elements to the comment
-                commentElement.appendChild(userInfo);
-                commentElement.appendChild(commentTextElement);
-                commentElement.appendChild(commentDate);
-                commentElement.appendChild(actions);
-
-                // Append the comment to the comments list
-                commentsList.appendChild(commentElement);
-
-                // Clear the textarea after posting comment
-                document.querySelector('.comment-form textarea').value = '';
-            }
-        }
-        
-
-    </script>
-
-
 </html>

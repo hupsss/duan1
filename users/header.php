@@ -31,14 +31,35 @@
                         </div>
                     </div>
                     <div class="header-main-search col-10 col-lg-4">
-                        <form action="/search" method="get" id="search-form" class="position-relative">
-                            <input type="text" class="form-control searchInput" name="q" required placeholder="Nhập từ khoá cần tìm...">
+                        <form action="?act=searchsp" method="post" id="search-form" class="position-relative">
+                            <input type="text" class="form-control searchInput" name="search" required placeholder="Nhập từ khoá cần tìm...">
                             <button class="search-button btn">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </form>
                     </div>
                     <div class="header-main-control col-4 col-lg-5 d-none d-lg-flex">
+                        <?php
+                            if(isset($_SESSION['email'])) {
+                                extract($_SESSION['email']);
+                            
+                        ?>
+                        <div class="header-control-user d-flex col-6 align-items-center">
+                            <div class="header-control-user-icon col-3 text-center">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="header-control-user-content col-9">
+                                <div class="header-control-user-content-top"><?= $fullName?></div>
+                                <div class="header-control-user-content-bottom">
+                                    <a href="?act=capnhaptaikhoan&id=<?= $account_id?>">Cập nhập tài khoản</a>
+                                    <span>*</span>
+                                    <a href="?act=dangxuat">Thoát</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                            } else {
+                        ?>
                         <div class="header-control-user d-flex col-6 align-items-center">
                             <div class="header-control-user-icon col-3 text-center">
                                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -52,6 +73,9 @@
                                 </div>
                             </div>
                         </div>
+                        <?php 
+                            }
+                        ?>
                         <div class="header-control-cart col-12 col-lg-5 d-flex align-items-center position-relative">
                             <div class="header-control-cart-icon col-3 text-center">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>

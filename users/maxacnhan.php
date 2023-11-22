@@ -45,23 +45,21 @@
                     </div>
                     <div class="recover-password-block col-12 col-lg-6">
                         <div class="recover-password-block-label margin-bottom-lg-30">
-                            Bạn quên mật khẩu? Nhập địa chỉ email để lấy mật khẩu qua email.</div>
+                            <div class="alert alert-primary">
+                                hãy xác nhận mã . Chúng tôi đã gửi về email của bạn
+                            </div>
+                        </div>
                         <div class="recover-password-block-form">
-                            <form action="?act=quenmatkhau" method="post" id="formRecoverPassword">
+                            <form action="?act=maxacnhan" method="post" id="formRecoverPassword">
                                 <div class="recover-password-form">
                                     <fieldset class="form-group">
-                                        <label>Email:</label>
-                                        <input type="email" class="form-control validate[required, custom[email]]"
-                                            id="recoverPasswordEmail" name="email" placeholder="Email">
+                                        <label>Nhập Mã Xác Nhận</label>
+                                        <input type="text" class="form-control validate[required, custom[email]]"
+                                            id="recoverPasswordEmail" name="code" placeholder="Email">
+                                        <input type="hidden" name="email" value="<?= $kq['email']?>">
                                     </fieldset>
-                                    <?php 
-                                        if(isset($thongBao_mk) && ($thongBao_mk != "")) {
-                                            echo ($thongBao_mk);
-                                        }
-                                    
-                                    ?>
                                     <div class="form-action margin-top-lg-30">
-                                    <input type="submit" class="btn button-hover-line tp_button" id="btnSignin" name="quenmatkhau" value="Lấy lại mật khẩu">
+                                    <input type="submit" class="btn button-hover-line tp_button" id="btnSignin" name="maxacnhan" value="Xác nhận mã">
 
                                     </div>
                                 </div>

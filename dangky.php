@@ -29,28 +29,29 @@
                                     <input type="email" class="form-control validate[required, custom[email]]"
                                         id="signupEmail" name="email" placeholder="Email">
                                 </fieldset>
+                                <?php if(isset($thongBao) && ($thongBao != "")) {
+                                        echo $thongBao ;
+                                        }
+                                        // echo "1213"; 
+                                ?>
                                 <div class="form-action margin-top-lg-30 d-none d-lg-block">
-                                    <a href="?act=dangky" class="btn button-hover-line tp_button"
-                                        id="btnSignup">
-                                        <span>Đăng ký</span>
-                                    </a>
+                                    <input type="submit" class="btn button-hover-line tp_button" name="dangky" id="btnSignup" value="Đăng ký">
                                 </div>
                             </div>
                             <div class="signup-form-right col-12 col-lg-6">
                                 <fieldset class="form-group">
                                     <label>Điện thoại:</label>
                                     <input type="text" class="form-control validate[required, custom[phone]]"
-                                        id="signupMobile" name="mobile" placeholder="Điện thoại">
+                                        id="signupMobile" name="tel" placeholder="Điện thoại">
                                 </fieldset>
                                 <fieldset class="form-group">
                                     <label>Mật khẩu:</label>
                                     <input type="password" class="form-control validate[required, minSize[6]]"
                                         id="signupPassword" name="password" placeholder="Mật khẩu">
                                 </fieldset>
+                                
                                 <div class="form-action margin-top-lg-30 d-lg-none">
-                                    <a href="?act=dangky" class="btn button-hover-line" id="btnSignup">
-                                        <span>Đăng ký</span>
-                                    </a>
+                                    <input type="submit" class="btn button-hover-line" name="dangky" id="btnSignup" value="Đăng ký">
                                 </div>
                             </div>
                         </form>

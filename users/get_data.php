@@ -6,8 +6,8 @@ if (isset($_POST['action'])) {
     $action = $_POST['action'];
     $minimumPrice = $_POST['minimun_price'];
     $maximumPrice = $_POST['maximun_price'];
-    
-    $sql = "SELECT * FROM product WHERE 1";
+    $category_id = $_POST['category_id'];
+    $sql = "SELECT * FROM product WHERE id_category = '".$category_id."'";
 
     if (isset($_POST['minimun_price'])) {
 
@@ -18,7 +18,7 @@ if (isset($_POST['action'])) {
         $color_filter = $_POST['color']; // Lấy giá trị màu từ biểu mẫu
     
         // Chuẩn bị câu truy vấn SQL
-        $sql = "SELECT * FROM product WHERE 1"; // WHERE 1 is always true, acts as a placeholder
+        $sql = "SELECT * FROM product WHERE id_category = '".$category_id."'"; // WHERE 1 is always true, acts as a placeholder
     
         // Kiểm tra xem mảng có phần tử hay không
         if (!empty($color_filter)) {
@@ -33,7 +33,7 @@ if (isset($_POST['action'])) {
         $material_filter = $_POST['material'];
     
         // Chuẩn bị câu truy vấn SQL
-        $sql = "SELECT * FROM product WHERE 1";
+        $sql = "SELECT * FROM product WHERE id_category = '".$category_id."'";
     
         // Kiểm tra xem mảng có phần tử hay không
         if (!empty($material_filter)) {
@@ -52,7 +52,7 @@ if (isset($_POST['action'])) {
             $size_filter = $_POST['size'];
         
             // Chuẩn bị câu truy vấn SQL
-            $sql = "SELECT * FROM product WHERE 1";
+            $sql = "SELECT * FROM product WHERE id_category = '".$category_id."'";
         
             // Kiểm tra xem mảng có phần tử hay không
             if (!empty($size_filter)) {

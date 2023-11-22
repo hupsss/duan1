@@ -1,4 +1,3 @@
-
 <section class="section-pview">
     <div class="site-breadcrumb">
         <div class="container">
@@ -98,7 +97,7 @@
                         </div>
                     </div>
                     <div class="pview-control-button col-12 padding-0">
-                        
+
                         <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
                             <span>Thêm vào giỏ hàng</span>
                         </a>
@@ -147,14 +146,16 @@
                     </h5>
                 </div>
                 <div class="pview-faq-box fb-comments" data-href="http://t0444.store.nhanh.vn/bo-ban-an-stefano-p18810311.html" data-numposts="5" data-colorscheme="light">
+                    <script>
+                        $(document).ready(function() {
+                            var id_product = <?= $ctsp['product_id'] ?>;
+                            $('#comments-list').load("users/binhluan/formbl.php", {
+                                id_product: id_product
+                            });
+                        });
+                    </script>
                     <div class="container-comment">
-                        <div class="comment-form">
-                            <textarea placeholder="Write your comment here..."></textarea>
-                            <button onclick="postComment()">Gửi bình luận</button>
-                        </div>
-
                         <ul class="comments" id="comments-list">
-                            <!-- Comments will be dynamically added here using JavaScript -->
                         </ul>
                     </div>
                 </div>
