@@ -19,7 +19,7 @@
                     </div>
                     <div class="pview-img-child owl-carousel margin-bottom-lg-15" id="pview-img-child-mobile">
                         <div class="pview-img-child-box" data-src="admin/upload/<?= $ctsp['image'] ?>">
-                            <img src="admin/upload/<?= $ctsp['image'] ?>" class="cloudzoom-gallery" data-cloudzoom="useZoom: '.cloudzoom', image: 'https://pos.nvncdn.net/ced45f-64461/ps/20191225_ZRYAvhiscJtKjwNwUi6yXsIc.jpg', zoomImage: 'https://pos.nvncdn.net/ced45f-64461/ps/20191225_ZRYAvhiscJtKjwNwUi6yXsIc.jpg'">
+                            <img src="admin/upload/<?= $ctsp['image'] ?>" class="cloudzoom-gallery" data-cloudzoom="useZoom: '.cloudzoom', image: 'admin/upload/<?= $ctsp['image'] ?>', zoomImage: 'admin/upload/<?= $ctsp['image'] ?>'">
                         </div>
                         <!-- <div class="pview-img-child-box" data-src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_KexepctcWvdGNWBlKsLyxlwk.jpg">
                             <img src="https://pos.nvncdn.net/ced45f-64461/ps/20191221_KexepctcWvdGNWBlKsLyxlwk.jpg" class="cloudzoom-gallery" data-cloudzoom="useZoom: '.cloudzoom', image: 'https://pos.nvncdn.net/ced45f-64461/ps/20191221_KexepctcWvdGNWBlKsLyxlwk.jpg', zoomImage: 'https://pos.nvncdn.net/ced45f-64461/ps/20191221_KexepctcWvdGNWBlKsLyxlwk.jpg'">
@@ -44,9 +44,30 @@
                     <div class="pview-type margin-bottom-lg-10">
                         Loại sản phẩm: <strong><?= $dmct['category_name'] ?></strong></div>
                     <div class="pview-intro margin-bottom-lg-10">
-                        <div class="pview-intro-label position-relative">
+                        <!-- <div class="pview-intro-label position-relative">
                             <strong>Giới thiệu sản phẩm</strong>
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="pview-intro-content hide" style="display: none;">
+                            <p>Chất Liệu Gỗ thịt/Veneer tần bì<br>
+                                Màu sắc Màu trắng<br>
+                                Kích thước Sâu 40 cm, Ngang 130 cm, Cao 54 cm<br>
+                                Mã Sản Phẩm 1074659<br>
+                                Thiết Kế Bởi<br>
+                                Xuất Xứ Vietnam</p>
+                        </div> -->
+                        <!-- Nội dung HTML của bạn ở đây -->
+                        <div class="pview-intro-label position-relative" onclick="toggleProductIntro()">
+                            <strong>Giới thiệu sản phẩm</strong>
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="pview-intro-content hide" style="display: none;">
+                            <p>Chất Liệu Gỗ thịt/Veneer tần bì<br>
+                                Màu sắc Màu trắng<br>
+                                Kích thước Sâu 40 cm, Ngang 130 cm, Cao 54 cm<br>
+                                Mã Sản Phẩm 1074659<br>
+                                Thiết Kế Bởi<br>
+                                Xuất Xứ Vietnam</p>
                         </div>
                         <div class="pview-intro-content hide">
                             <p><?= $ctsp['descripsion'] ?></p>
@@ -99,7 +120,7 @@
                     <div class="pview-control-button col-12 padding-0">
 
                         <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
-                            <span>Thêm vào giỏ hàng</span>
+                            <span><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm vào giỏ hàng</span>
                         </a>
                         <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
                             <span>Mua hàng</span>

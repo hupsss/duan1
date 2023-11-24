@@ -134,6 +134,9 @@
                                 <a href="index.php?act=thongke" class="nav-link nav-link-1 tp_menu_item">Thống kê</a>
                             </li>
                             <li class="nav-item nav-item-1 ">
+                                <a href="../index.php" class="nav-link nav-link-1 tp_menu_item">trở lại user</a>
+                            </li>
+                            <li class="nav-item nav-item-1 ">
                                 <a href="?act=dangxuat" class="nav-link nav-link-1 tp_menu_item">Thoát</a>
                             </li>
                         </ul>

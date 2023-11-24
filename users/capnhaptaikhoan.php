@@ -7,7 +7,7 @@
         <div class="col-md-3">
             <div class="text-center">
                     <img src="admin/upload/<?= $image ?>" class="avatar img-circle img-thumbnail" alt="avatar">
-                    <h6><?= $fullName ?></h6>
+                    <h4 ><?= $fullName ?></h4>
             </div>
         </div>
 

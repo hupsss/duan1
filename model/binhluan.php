@@ -19,7 +19,7 @@
     }
 
     function load_comment($id_product) {
-        $sql = "SELECT comment_id, content, id_product, date_comment, fullName ,image FROM comment JOIN account on id_account = account_id WHERE 1 ";
+        $sql = "SELECT comment_id, content, id_product, id_account, date_comment, fullName ,image FROM comment JOIN account on id_account = account_id WHERE 1 ";
             if($id_product > 0) {
                 $sql .= " AND id_product = '".$id_product."'";
             }

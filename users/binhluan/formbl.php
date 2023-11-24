@@ -31,42 +31,32 @@ $dsbl = load_comment($id_product)
         <div class="container-comment">
             <ul class="comments" id="comments-list">
                 <?php foreach ($dsbl as $bl) : ?>
-                    <!-- <li class="comment">
-                        <div class="user-info"><img src="admin/upload/<?= $bl['image'] ?>" alt="User Image">
-                            <div class="username"><?= $bl['fullName'] ?></div>
-                        </div>
-                        <div class="comment-text"><?= $bl['content'] ?></div>
-                        <div class="comment-date"><?= $bl['date_comment'] ?></div>
-                        <div class="actions">
-                            <?php if (isset($_SESSION['email']) && ($_SESSION['email']['role'] === 0)) : ?>
-                                <a href="#" class="edit-comment" data-comment-id="<?= $bl['comment_id'] ?>">Edit</a>
-                                <a href="#" class="delete-comment" data-comment-id="<?= $bl['comment_id'] ?>">Delete</a>
-                            <?php endif; ?>
-                        </div>
-
-                    </li> -->
-                    <!-- Thêm ô input và đặt thuộc tính display: none; -->
                     <li class="comment">
                         <div class="user-info">
                             <img src="admin/upload/<?= $bl['image'] ?>" alt="User Image">
                             <div class="username"><?= $bl['fullName'] ?></div>
                         </div>
-                        <div class="comment-text" id="comment-text-<?= $bl['comment_id'] ?>">
-                            <?= $bl['content'] ?>
-                        </div>
-                        <input class="edit-comment-input" type="text" id="edit-comment-input-<?= $bl['comment_id'] ?>" value="<?= $bl['content'] ?>" style="display: none;">
+                        <div class="comment-text" id="comment-text-<?= $bl['comment_id'] ?>"><?= $bl['content'] ?></div>
                         <div class="comment-date"><?= $bl['date_comment'] ?></div>
                         <div class="actions">
-                            <?php if (isset($_SESSION['email']) && ($_SESSION['email']['role'] === 0)) : ?>
-                                <a href="#" class="edit-comment" data-comment-id="<?= $bl['comment_id'] ?>">Edit</a>
-                                <a href="#" class="delete-comment" data-comment-id="<?= $bl['comment_id'] ?>">Delete</a>
+                            <?php
+                            // Kiểm tra xem người dùng có quyền sửa và xóa bình luận không
+                            if (
+                                isset($_SESSION['email']) &&
+                                ($_SESSION['email']['role'] === 0) && // Đảm bảo người dùng có quyền
+                                ($_SESSION['email']['account_id'] === $bl['id_account']) // Kiểm tra id tài khoản
+                            ) :
+                            ?>
+                                    <input class="edit-comment-input" type="text" id="edit-comment-input-<?= $bl['comment_id'] ?>" value="<?= $bl['content'] ?>" style="display: none;">
+                                <a href="#" class="edit-comment" data-comment-id="<?= $bl['comment_id'] ?>">Sửa</a>
+                                <a href="#" style="color:red" class="delete-comment" data-comment-id="<?= $bl['comment_id'] ?>">Xóa</a>
                             <?php endif; ?>
                         </div>
                     </li>
                 <?php endforeach ?>
             </ul>
             <?php
-            if (isset($_SESSION['email']) && ($_SESSION['email']['role'] === 0)) :
+            if (isset($_SESSION['email']) && ($_SESSION['email']['role'] === 0 || $_SESSION['email']['role'] === 1)) :
             ?>
                 <div class="comment-form">
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
@@ -99,7 +89,7 @@ $dsbl = load_comment($id_product)
             var commentId = $(this).data('comment-id');
 
             // Lấy giá trị hiện tại của bình luận
-            var currentComment = $('#comment-text-' + commentId).text();
+            var currentComment = $('#comment-text-' + commentId).text().trim();
 
             // Đặt giá trị vào ô input
             $('#edit-comment-input-' + commentId).val(currentComment);
@@ -107,13 +97,24 @@ $dsbl = load_comment($id_product)
             // Ẩn văn bản bình luận và hiển thị ô input
             $('#comment-text-' + commentId).hide();
             $('#edit-comment-input-' + commentId).show();
+
+            // Gắn sự kiện keydown cho ô input
+            $('#edit-comment-input-' + commentId).on('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    // Ngăn chặn sự kiện mặc định (ngăn không cho form submit)
+                    event.preventDefault();
+
+                    // Gọi hàm xử lý lưu sửa đổi khi nhấn phím Enter
+                    saveComment(commentId);
+
+                    // Load lại trang web
+                    location.reload();
+                }
+            });
         });
 
-        // Xử lý khi nhấn vào nút Lưu (để lưu sửa đổi)
-        $('.save-comment').on('click', function(e) {
-            e.preventDefault();
-            var commentId = $(this).data('comment-id');
-
+        // Hàm xử lý lưu sửa đổi
+        function saveComment(commentId) {
             // Lấy giá trị từ ô input sau khi sửa đổi
             var editedContent = $('#edit-comment-input-' + commentId).val();
 
@@ -137,6 +138,9 @@ $dsbl = load_comment($id_product)
                         // Ẩn ô input và hiển thị lại văn bản bình luận
                         $('#edit-comment-input-' + commentId).hide();
                         $('#comment-text-' + commentId).show();
+
+                        // Hủy sự kiện keydown để tránh xử lý trùng lặp
+                        $('#edit-comment-input-' + commentId).off('keydown');
                     } else {
                         // Xử lý lỗi, ví dụ: thông báo lỗi
                         console.error(response.message);
@@ -146,7 +150,7 @@ $dsbl = load_comment($id_product)
                     console.log('Error:', error);
                 }
             });
-        });
+        }
 
         // Xử lý khi nhấp vào nút Xóa
         $('.delete-comment').on('click', function(e) {
@@ -158,22 +162,23 @@ $dsbl = load_comment($id_product)
                 // Gửi yêu cầu xóa đến server bằng Ajax
                 $.ajax({
                     type: 'POST',
-                    url: 'users/binhluan/delete_comment.php', // Đặt đường dẫn đến tệp PHP xử lý xóa ở đây
+                    url: 'users/binhluan/delete_comment.php',
                     data: {
                         comment_id: commentId
                     },
-                    dataType: 'json', // Đặt kiểu dữ liệu mong đợi là JSON
+                    dataType: 'json',
                     success: function(response) {
                         if (response.status === 'success') {
                             // Xóa bình luận khỏi giao diện nếu xóa thành công
                             $('#comment-' + commentId).remove();
                             console.log(response.message);
 
-                            // Reload trang sau khi xóa nếu cần
-                            // window.location.reload();
+                            // Reload trang sau khi xóa
+
                         } else {
-                            // Xử lý lỗi, ví dụ: thông báo lỗi
-                            console.error(response.message);
+                            // Log thông báo lỗi từ server
+                            console.error('Server Error:', response.message);
+                            window.location.href = window.location.href; // Sử dụng window.location.href để tải lại trang
                         }
                     },
                     error: function(error) {

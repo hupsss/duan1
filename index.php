@@ -385,4 +385,5 @@ include "model/phong.php";
         });
     });
 </script>
+<script src="assets/js/chitiet.js"></script>
 </html>
