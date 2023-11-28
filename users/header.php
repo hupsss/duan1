@@ -1,5 +1,5 @@
 <header>
-    <section class="section-header tp_header">
+    <section class="section-header tp_header" id="header">
         <div class="header-top d-none d-lg-block">
             <div class="container">
                 <div class="row">
@@ -40,54 +40,73 @@
                     </div>
                     <div class="header-main-control col-4 col-lg-5 d-none d-lg-flex">
                         <?php
-                            if(isset($_SESSION['email'])) {
-                                extract($_SESSION['email']);
-                            
+                        if (isset($_SESSION['email']) && isset($_SESSION['email']['role'])=== 0) {
+                            extract($_SESSION['email']);
+
                         ?>
-                        <div class="header-control-user d-flex col-6 align-items-center">
-                            <div class="header-control-user-icon col-3 text-center">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </div>
-                            <div class="header-control-user-content col-9">
-                                <div class="header-control-user-content-top"><?= $fullName?></div>
-                                <div class="header-control-user-content-bottom">
-                                    <a href="?act=capnhaptaikhoan&id=<?= $account_id?>">Cập nhập tài khoản</a>
-                                    <span>*</span>
-                                    <a href="?act=dangxuat">Thoát</a>
+                            <div class="header-control-user d-flex col-6 align-items-center">
+                                <div class="header-control-user-icon col-3 text-center">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </div>
+                                <div class="header-control-user-content col-9">
+                                    <div class="header-control-user-content-top"><?= $fullName ?></div>
+                                    <div class="header-control-user-content-bottom">
+                                        <a href="?act=capnhaptaikhoan&id=<?= $account_id ?>">Cập nhập tài khoản</a>
+                                        <span>*</span>
+                                        <a href="?act=dangxuat">Thoát</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <?php
-                            } else {
+                        } else {
                         ?>
-                        <div class="header-control-user d-flex col-6 align-items-center">
-                            <div class="header-control-user-icon col-3 text-center">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </div>
-                            <div class="header-control-user-content col-9">
-                                <div class="header-control-user-content-top">Tài khoản</div>
-                                <div class="header-control-user-content-bottom">
-                                    <a href="?act=dangnhap">Đăng nhập</a>
-                                    <span>*</span>
-                                    <a href="?act=dangky">Đăng ký</a>
+                            <div class="header-control-user d-flex col-6 align-items-center">
+                                <div class="header-control-user-icon col-3 text-center">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </div>
+                                <div class="header-control-user-content col-9">
+                                    <div class="header-control-user-content-top">Tài khoản</div>
+                                    <div class="header-control-user-content-bottom">
+                                        <a href="?act=dangnhap">Đăng nhập</a>
+                                        <span>*</span>
+                                        <a href="?act=dangky">Đăng ký</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <?php 
-                            }
+                        <?php
+                        }
                         ?>
-                        <div class="header-control-cart col-12 col-lg-5 d-flex align-items-center position-relative">
-                            <div class="header-control-cart-icon col-3 text-center">
+                        <?php
+                            $quantity = 0;
+                            $total = 0;
+                            $subtotal = 0;
+                            if(isset($_SESSION['cart'])) {
+                                foreach($_SESSION['cart'] as $item) {
+                                    $quantity += (int)$item['quantity'];
+                                    $total += (int)$item['quantity'] * (int)$item['price'];
+                                    $subtotal += $total;
+                               }
+                            }
+                        
+                        ?>
+                        <div id="cart" class="header-control-cart col-12 col-lg-5 d-flex align-items-center position-relative" >
+                            <div class="header-control-cart-icon col-3 text-center position-relative">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            </div><a href="/cart" class="d-block col-9">
+                                <span id="qty" class="badge badge-danger position-absolute top-0 end-0 rounded-circle" style="font-size: 10px; padding: 5px;"><?= $quantity?></span>
+                            </div>
+                            <a href="?act=giohang" class="d-block col-9">
                                 <div class="header-control-cart-content text-center">
                                     <div class="header-control-cart-content-top">Giỏ hàng</div>
                                     <div class="header-control-cart-content-bottom">
-                                        <strong>0</strong> Sản phẩm
+                                        <strong id="total"><?= number_format($subtotal)?></strong> VND
                                     </div>
                                 </div>
                             </a>
-                            <div class="header-control-cart-count-items hide"></div>
+                            <div   class="header-control-cart-count-items  cart" style="display: none;">
+                                Có 
+                                <strong><?= $quantity?></strong>
+                                sản phẩm
+                            </div>
                         </div>
                     </div>
                     <div class="header-main-control-mobile d-lg-none row col-2 position-relative" onclick="location.href = '/cart'">
@@ -102,23 +121,23 @@
             <div class="container">
                 <nav>
                     <ul class="nav nav-pills nav-ul-1">
-                       
+
                         <li class="nav-item nav-item-1 ">
                             <a href="index.php?act=trangchu" class="nav-link nav-link-1 tp_menu_item">Trang Chủ</a>
                         </li>
-                        
-                        <?php foreach($dsdm as $dm) : ?>
-                        <li class="nav-item nav-item-1 ">
-                            <a href="?act=timkiemdm&category_id=<?= $dm['category_id']?>" class="nav-link nav-link-1 tp_menu_item"><?= $dm['category_name']?></a>
-                        </li>
-                        <?php endforeach?>
+
+                        <?php foreach ($dsdm as $dm) : ?>
+                            <li class="nav-item nav-item-1 ">
+                                <a href="?act=timkiemdm&category_id=<?= $dm['category_id'] ?>" class="nav-link nav-link-1 tp_menu_item"><?= $dm['category_name'] ?></a>
+                            </li>
+                        <?php endforeach ?>
                         <li class="nav-item nav-item-1 ">
                             <a href="?act=lienhe" class="nav-link nav-link-1 tp_menu_item">Liên Hệ</a>
                         </li>
                         <li class="nav-item nav-item-1 ">
                             <a href="?act=tintuc" class="nav-link nav-link-1 tp_menu_item">Tin Tức</a>
                         </li>
-                        
+
                     </ul>
                 </nav>
             </div>

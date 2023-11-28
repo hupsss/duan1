@@ -1,15 +1,10 @@
 <?php
+    // lấy tất cả các trường dữ liệu trong bảng tài khoản
     function loadAll_account() {
         $sql = "SELECT * FROM account order by account_id desc";
         $result = pdo_query($sql);
         return $result;
     }
-
-    // function add_account($fullName,$password,$email,$tel){
-    //     $sql = "INSERT INTO account(fullName,password,email,tel) 
-    //             VALUES('$fullName','$password','$email','$tel')";
-    //     pdo_execute($sql);
-    // }
 
     function add_account($fullName, $password, $email, $tel) {
         // Kiểm tra xem email đã tồn tại chưa
@@ -43,7 +38,11 @@
     function Check_email($email) {
         $sql = "SELECT * FROM account WHERE email = '".$email."' ";
         $result = pdo_query_one($sql);
-        return $result;
+        if($result) {
+            return $result;
+        } else {
+            return false; // Trả về giá trị false nếu email không tồn tại
+        }
     }
 
     function edit_account($id) {
@@ -66,9 +65,8 @@
         return $result;
     }
 
-    function update_account_admin($account_id,$hoTen,$user,$email,$passwork,$address,$tel,$role) {
-        $sql = "UPDATE account SET  hoTen = '$hoTen',user='$user' ,email = '$email', 
-                passwork = '$passwork', address = '$address', tel = '$tel', role = '$role' WHERE account_id=$account_id";
+    function update_account_admin($account_id,$role) {
+        $sql = "UPDATE account SET role = '$role' WHERE account_id=$account_id";
         $result = pdo_execute($sql);
         return $result;
     }
@@ -83,6 +81,12 @@
     function count_account() {
         $sql = "SELECT count(account_id) as counttk FROM account";
         $result = pdo_query_one($sql);
+        return $result;
+    }
+
+    function forgetPass($password,$email) {
+        $sql = "UPDATE account SET password = '$password' Where email = '$email'";
+        $result = pdo_execute($sql);
         return $result;
     }
 ?>

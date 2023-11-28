@@ -6,6 +6,7 @@ ob_start();
     include "../model/sanpham.php";
     include "../model/taikhoan.php";
     include "../model/binhluan.php";
+    include "../model/giohang.php";
     include "header.php";
    
     if(isset($_SESSION['email']) && ($_SESSION['email']['role'] === 1)) {
@@ -15,6 +16,10 @@ ob_start();
                 case "trangchu":
                     include "main.php";
                     break;
+
+                /*************************************************************************
+                 *                       QUẢN LÝ DANH SÁCH DANH MỤC                      *      
+                 *************************************************************************/
                 case "dsdm":
                     $dsdm = loadAll_dm();
                     include "danhmuc/list_category.php";
@@ -63,6 +68,11 @@ ob_start();
                     $dsdm = loadAll_dm();
                     include "danhmuc/list_category.php";
                     break;
+
+                /*************************************************************************
+                 *                       QUẢN LÝ DANH SÁCH SẢN PHẨM                   *      
+                 *************************************************************************/
+
                 case "dssp":
                     $dssp = loadAll_sp();
                     // $ds_dm = categories();
@@ -156,10 +166,30 @@ ob_start();
                     $dssp = loadAll_sp();
                     include "sanpham/list_product.php";
                     break;
+
+                /*************************************************************************
+                 *                       QUẢN LÝ DANH SÁCH TÀI KHOẢN                     *      
+                 *************************************************************************/    
                 case "dstk":
                     $dstk = loadAll_account();
                     include "taikhoan/list_account.php";
                     break;
+                case "edittk":
+                    if(isset($_GET['id']) && ($_GET['id'] > 0)) {
+                        $id = $_GET['id'];
+                        $tk = edit_account($id);
+                    }
+                    include "taikhoan/edit_account.php";
+                    break;
+                case "updatetk":
+                    if(isset($_POST['capnhapchucnang']) && ($_POST['capnhapchucnang'])) {
+                        $account_id = $_POST['account_id'];
+                        $role = $_POST['role'];
+                        update_account_admin($account_id,$role);
+                    }
+                    $dstk = loadAll_account(); 
+                    include "taikhoan/list_account.php";
+                    break;   
                 case "deletk":
                     if(isset($_GET['id']) && ($_GET['id'])) {
                         $id = $_GET['id'];
@@ -168,6 +198,10 @@ ob_start();
                     $dstk = loadAll_account();
                     include "taikhoan/list_account.php";
                     break;
+
+                /*************************************************************************
+                 *                       QUẢN LÝ DANH SÁCH BÌNH LUẬN                    *      
+                 *************************************************************************/
                 case "dsbl":
                     $dsbl = loadAll_comment();
                     include "binhluan/list_comment.php";
@@ -180,10 +214,30 @@ ob_start();
                     $dsbl = loadAll_comment();
                     include "binhluan/list_comment.php";
                     break;
+                case "dsdh":
+                    $dsdh = loadAll_Order();
+                    include "giohang/list_order.php";
+                    break;
+                case "deledh":
+                    if(isset($_GET['id']) && ($_GET['id'])) {
+                        $id = $_GET['id'];
+                        delete_Order($id);
+                    }
+                    $dsdh = loadAll_Order();
+                    include "giohang/list_order.php";
+                    break;    
+                case "chitietdonhang":
+                    if(isset($_GET['id']) && ($_GET['id'])) {
+                        $id = $_GET['id'];
+                        $ctdh = loadAll_Orderdetail($id);
+                    }
+                    include "giohang/chitetdonhang.php";
+                    break;
                 case "dangxuat":
                     session_destroy();
                     header("location: ../index.php?act=trangchu");
                     break;
+                
                 default:
                     include "main.php";
                     break;

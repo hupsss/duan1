@@ -100,7 +100,7 @@ if (isset($_POST['action'])) {
                         <a href="?act=chitiet&id=' . $sp['product_id'] . '" class="tp_product_name">' . htmlentities($sp['product_name']) . '</a>
                     </h6>
                     <div class="product-price-box text-center">
-                        <div class="product-price tp_product_price">' . htmlentities($sp['price']) . '</div>
+                        <div class="product-price tp_product_price">' . htmlentities(number_format($sp['price'])) . '</div>
                     </div>
                     <div class="product-action text-center">
                         <a href="?act=chitiet&id=' . $sp['product_id'] . '" class="btn button-hover-line tp_button">

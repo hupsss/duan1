@@ -15,9 +15,7 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Các Loại Sản Phẩm</h6>
-            </div>
+            
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -47,6 +45,7 @@
                                     <td><?= $tk['tel'] ?></td>
                                     <td><?= $tk['role'] ?></td>
                                     <td>
+                                        <a href="index.php?act=edittk&id=<?= $tk['account_id'] ?>"><button type="button" class="btn btn-warning">Sửa</button></a>
                                         <a href="index.php?act=deletk&id=<?= $tk['account_id'] ?>" onclick="return confirm('ban muon xoa khong')"><button type="button" class="btn btn-danger">Xóa</button></a>
                                     </td>
                                 </tr>
