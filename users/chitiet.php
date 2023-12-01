@@ -44,19 +44,6 @@
                     <div class="pview-type margin-bottom-lg-10">
                         Loại sản phẩm: <strong><?= $dmct['category_name'] ?></strong></div>
                     <div class="pview-intro margin-bottom-lg-10">
-                        <!-- <div class="pview-intro-label position-relative">
-                            <strong>Giới thiệu sản phẩm</strong>
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="pview-intro-content hide" style="display: none;">
-                            <p>Chất Liệu Gỗ thịt/Veneer tần bì<br>
-                                Màu sắc Màu trắng<br>
-                                Kích thước Sâu 40 cm, Ngang 130 cm, Cao 54 cm<br>
-                                Mã Sản Phẩm 1074659<br>
-                                Thiết Kế Bởi<br>
-                                Xuất Xứ Vietnam</p>
-                        </div> -->
-                        <!-- Nội dung HTML của bạn ở đây -->
                         <div class="pview-intro-label position-relative" onclick="toggleProductIntro()">
                             <strong>Giới thiệu sản phẩm</strong>
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -77,16 +64,8 @@
                         <div class="pview-color-label col-3 padding-0"><b>Màu sắc:</b></div>
                         <div class="pview-color-wrapper col-9 position-relative padding-0">
                             <div class="pview-color-wrapper-label position-relative pointer">
-                                <span>-</span>
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </div>
-                            <div class="pview-color-wrapper-list size-attr attr hide">
-                                <div class="color-select req" data-column="i1">
-                                    <a href="javascript:void(0);" rel="nofollow" data-value="786647" data-psIds="18897694,18897696,18897698" data-name="Nâu đen" class=" d-block">
-                                        Nâu đen </a>
-                                    <a href="javascript:void(0);" rel="nofollow" data-value="786640" data-psIds="18897695,18897697,18897699" data-name="Ghi" class=" d-block">
-                                        Ghi </a>
-                                </div>
+                                <span><strong><?= $ctsp['color'] ?></strong></span>
+
                             </div>
                         </div>
                     </div>
@@ -94,18 +73,8 @@
                         <div class="pview-size-label col-3 padding-0"><b>Kích cỡ:</b></div>
                         <div class="pview-size-wrapper col-9 position-relative padding-0">
                             <div class="pview-size-wrapper-label position-relative pointer">
-                                <span>-</span>
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </div>
-                            <div class="pview-size-wrapper-list size-attr attr hide">
-                                <div class="size-select req" data-column="i2">
-                                    <a href="javascript:void(0);" rel="nofollow" data-value="786637" data-name="Lớn" class=" d-block">
-                                        Lớn </a>
-                                    <a href="javascript:void(0);" rel="nofollow" data-value="786636" data-name="Vừa" class=" d-block">
-                                        Vừa </a>
-                                    <a href="javascript:void(0);" rel="nofollow" data-value="786635" data-name="Nhỏ" class=" d-block">
-                                        Nhỏ </a>
-                                </div>
+                                <span><strong><?= $ctsp['size'] ?></strong></span>
+
                             </div>
                         </div>
                     </div>
@@ -117,14 +86,16 @@
                             <a href="javascript:void(0);" class="entry number-plus d-inline-flex align-items-center justify-content-center">+</a>
                         </div>
                     </div>
+
                     <div class="pview-control-button col-12 padding-0">
 
-                        <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
+                        <button class="pview-buy-button btn button-hover-line tp_button" onclick="addCart(<?= $ctsp['product_id'] ?>)">
                             <span><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm vào giỏ hàng</span>
-                        </a>
-                        <a href="javascript:void(0);" class="pview-buy-button btn button-hover-line tp_button" data-psId="18810311" data-selId="18810311" data-ck="0">
+                        </button>
+                        <button class="pview-buy-button btn button-hover-line tp_button" id="buyButton" data-psId="<?= $ctsp['product_id'] ?>" data-psName="<?= $ctsp['product_name'] ?>" data-psPrice="<?= $ctsp['price'] ?>" data-psColor="<?= $ctsp['color'] ?>" data-psSize="<?= $ctsp['size'] ?>" data-psQuantity="1" data-ck="0">
                             <span>Mua hàng</span>
-                        </a>
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -166,7 +137,7 @@
                         <a href="javascript:void(0);" class="tp_title position-relative">Bình Luận</a>
                     </h5>
                 </div>
-                <div class="pview-faq-box fb-comments" data-href="http://t0444.store.nhanh.vn/bo-ban-an-stefano-p18810311.html" data-numposts="5" data-colorscheme="light">
+                <div class="pview-faq-box fb-comments" id="listComment">
                     <script>
                         $(document).ready(function() {
                             var id_product = <?= $ctsp['product_id'] ?>;
@@ -223,3 +194,35 @@
         </div>
     </div>
 </section>
+<!-- Lấy dữ liệu sau khi click mua ngay -->
+
+<!--  -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const quantityInput = document.getElementById('psQtt');
+        const numberMinus = document.querySelector('.number-minus');
+        const numberPlus = document.querySelector('.number-plus');
+
+        numberMinus.addEventListener('click', function() {
+            decrementQuantity();
+        });
+
+        numberPlus.addEventListener('click', function() {
+            incrementQuantity();
+        });
+
+        function incrementQuantity() {
+            let currentValue = parseInt(quantityInput.value, 10);
+            if (currentValue < parseInt(quantityInput.max, 10)) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        function decrementQuantity() {
+            let currentValue = parseInt(quantityInput.value, 10);
+            if (currentValue > parseInt(quantityInput.min, 10)) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+    });
+</script>

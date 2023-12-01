@@ -5,7 +5,7 @@
                 <div class="footer-left col-12 col-lg-6">
                     <div class="footer-left-logo">
                         <a href="/">
-                            <img class="lazyload" data-sizes="auto" src="../assets/image/png.png"  alt="logo">
+                            <img class="lazyload" data-sizes="auto" src="../assets/image/png.png" alt="logo">
                         </a>
                     </div>
                     <div class="footer-left-info">Nỗ lực nghiên cứu những tập quán, thói quen sinh hoạt của người
@@ -29,7 +29,7 @@
                             <a href="javascript:" class="footer-left-icon">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                             </a><a href="mailto:contact@nhanh.vn" class="footer-left-content">
-                            phamsyhuan0@gmail.com </a>
+                                phamsyhuan0@gmail.com </a>
                         </div>
                     </div>
                 </div>
@@ -81,4 +81,66 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<script src="../assets/js/admin.js"></script>
+<script>
+    const ctx = document.getElementById("myChart");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Sản phẩm","Khách hàng","Bình luận","Đơn hàng"],
+            datasets: [{
+                label: "Thống kê chung cửa hàng",
+                data: data1,
+                borderWidth: 1,
+                backgroundColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(75, 192, 192)",
+                    "rgb(255, 205, 86)",
+                    "rgb(201, 203, 207)",
+                ],
+            }, ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+
+    const ctx2 = document.getElementById("myChart2");
+
+    new Chart(ctx2, {
+        type: "line",
+        data: {
+            labels: ["Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8"],
+            datasets: [{
+                label: "Doanh số cửa hàng 5 tháng gần nhất",
+                data: [
+                    12,
+                    12,
+                    13,
+                    5,
+                    17
+                ],
+                borderWidth: 2,
+                borderColor: "rgb(75, 192, 192)",
+                tension: 0.1,
+                backgroundColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(75, 192, 192)",
+                    "rgb(255, 205, 86)",
+                    "rgb(201, 203, 207)",
+                ],
+            }, ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+</script>

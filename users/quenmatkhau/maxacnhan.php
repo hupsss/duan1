@@ -55,9 +55,15 @@
                                     <fieldset class="form-group">
                                         <label>Nhập Mã Xác Nhận</label>
                                         <input type="text" class="form-control validate[required, custom[email]]"
-                                            id="recoverPasswordEmail" name="code" placeholder="Email">
+                                            id="recoverPasswordEmail" name="code" placeholder="Mã Xác nhận">
                                         <input type="hidden" name="email" value="<?= $kq['email']?>">
                                     </fieldset>
+                                    <?php 
+                                        if(isset($thongBao_code['fail']) && $thongBao_code['fail'] != "") {
+                                            echo $thongBao_code['fail'];
+                                        }
+                                        
+                                    ?>
                                     <div class="form-action margin-top-lg-30">
                                     <input type="submit" class="btn button-hover-line tp_button" id="btnSignin" name="maxacnhan" value="Xác nhận mã">
 

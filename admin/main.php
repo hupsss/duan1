@@ -13,7 +13,15 @@
             <canvas class="mt-5" id="myChart2"></canvas>
         </div>
     </div>
+    
 </section>
 <script>
-    const data1 = [10, 20, 30, 40, 50]
+    const data1 = [
+        <?= $sp['countsp']?>,
+        <?= $tk['counttk']?>,
+        <?= $bl['countcm']?>,
+        <?= $dh['countdh']?> 
+        ]
+
+        
 </script>

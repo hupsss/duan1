@@ -30,17 +30,9 @@ class Mailer
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('phamvanquyenql360@gmail.com', 'nhận code hộ bố');
+            $mail->setFrom('phamvanquyenql360@gmail.com', 'Mã xác nhận');
             $mail->addAddress($addressMail);     //Add a recipient
-            // $mail->addAddress('ellen@example.com');               //Name is optional
-            // $mail->addReplyTo('info@example.com', 'Information');
-            // $mail->addCC('cc@example.com');
-            // $mail->addBCC('bcc@example.com');
-
-            // //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
+            
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = $title;

@@ -55,8 +55,11 @@
                                             id="recoverPasswordEmail" name="email" placeholder="Email">
                                     </fieldset>
                                     <?php 
-                                        if(isset($thongBao_mk) && ($thongBao_mk != "")) {
-                                            echo ($thongBao_mk);
+                                        if(isset($message) && ($message != "")) {
+                                            echo ($message);
+                                        }
+                                        if(isset($thongBao_em) && ($thongBao_em != "")) {
+                                            echo $thongBao_em;
                                         }
                                     
                                     ?>

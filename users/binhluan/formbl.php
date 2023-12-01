@@ -43,7 +43,7 @@ $dsbl = load_comment($id_product)
                             // Kiểm tra xem người dùng có quyền sửa và xóa bình luận không
                             if (
                                 isset($_SESSION['email']) &&
-                                ($_SESSION['email']['role'] === 0) && // Đảm bảo người dùng có quyền
+                                ($_SESSION['email']['role'] === 0 || $_SESSION['email']['role'] === 1) && // Đảm bảo người dùng có quyền
                                 ($_SESSION['email']['account_id'] === $bl['id_account']) // Kiểm tra id tài khoản
                             ) :
                             ?>
@@ -108,7 +108,9 @@ $dsbl = load_comment($id_product)
                     saveComment(commentId);
 
                     // Load lại trang web
-                    location.reload();
+                   $('#comments-list').load("users/binhluan/formbl.php", {
+                                id_product: 21
+                            });
                 }
             });
         });
