@@ -41,10 +41,11 @@
                                     <td><?= $dh['price'] ?></td>
                                     <td><?= $dh['total'] ?></td>
                                     <td>
-                                        <select class="status-select" data-detail-id="<?= $dh['detail_id'] ?>">
+                                        <select class="status-select" data-detail-id="<?= $dh['detail_id'] ?>" <?= $dh['status'] == 3 ? 'disabled' : '' ?>>
                                             <option value="1" <?= $dh['status'] == 1 ? 'selected' : '' ?>>Đang chờ xử lý</option>
                                             <option value="0" <?= $dh['status'] == 0 ? 'selected' : '' ?>>Đã giao hàng</option>
-                                            <option value="2" <?= $dh['status'] == 2 ? 'selected' : '' ?>>Đơn hàng bị hủy</option>
+                                            <option value="2" <?= $dh['status'] == 0 ? 'selected' : '' ?>>Đang giao hàng</option>
+                                            <option value="3" <?= $dh['status'] == 3 ? 'selected' : '' ?>>Đơn hàng bị hủy</option>
                                         </select>
                                     </td>
                                     <td><?= $dh['created_time'] ?></td>

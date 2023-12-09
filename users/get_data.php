@@ -66,19 +66,6 @@ if (isset($_POST['action'])) {
             }
         }
 
-    // if (isset($_POST['size'])) {
-    //     $size_filter = $_POST['size'];
-
-    //     // Chuẩn bị câu truy vấn SQL
-    //     $sql = "SELECT * FROM product";
-
-    //     // Kiểm tra xem mảng có phần tử hay không
-    //     if (!empty($size_filter)) {
-    //         // Chuyển mảng thành chuỗi và thêm vào câu truy vấn SQL
-    //         $size_filter_string = implode("','", $size_filter) ;
-    //         $sql .= " AND size IN ('".$size_filter_string."')";
-    //     }
-    // }
     $result = pdo_query($sql);
     $count = count($result);
     $output = "";

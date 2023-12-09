@@ -8,18 +8,21 @@
                     <div class="signin-block-form">
                         <form action="?act=checkout" method="post" id="formSignin">
                             <div class="signin-form">
+                                <?php if(isset($_SESSION['email'])) {
+                                    extract($_SESSION['email']);
+                                } ?>
                                 <fieldset class="form-group">
                                     <label>Họ và Tên</label>
-                                    <input type="text" class="form-control validate[required, custom[email]]" id="fullName" name="fullName" placeholder="Họ và Tên">
+                                    <input type="text" class="form-control validate[required, custom[email]]" id="fullName" value="<?= $fullName?>" name="fullName" placeholder="Họ và Tên">
                                 </fieldset>
                                 <fieldset class="form-group">
                                     <label>Số điện thoại</label>
-                                    <input type="number" class="form-control validate[required, minSize[6]]" id="tel" name="tel" placeholder="Số điện thoại">
+                                    <input type="number" class="form-control validate[required, minSize[6]]" id="tel" value="<?= $tel?>" name="tel" placeholder="Số điện thoại">
                                 </fieldset>
 
                                 <fieldset class="form-group">
                                     <label>Địa chỉ</label>
-                                    <input type="text" class="form-control validate[required, minSize[6]]" id="address" name="address" placeholder="Địa chỉ">
+                                    <input type="text" class="form-control validate[required, minSize[6]]" id="address" value="<?= $address?>" name="address" placeholder="Địa chỉ">
                                 </fieldset>
 
                                 <fieldset class="form-group">

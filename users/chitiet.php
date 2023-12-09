@@ -49,12 +49,7 @@
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </div>
                         <div class="pview-intro-content hide" style="display: none;">
-                            <p>Chất Liệu Gỗ thịt/Veneer tần bì<br>
-                                Màu sắc Màu trắng<br>
-                                Kích thước Sâu 40 cm, Ngang 130 cm, Cao 54 cm<br>
-                                Mã Sản Phẩm 1074659<br>
-                                Thiết Kế Bởi<br>
-                                Xuất Xứ Vietnam</p>
+                            <p><?= $dmct['description'] ?></p>
                         </div>
                         <div class="pview-intro-content hide">
                             <p><?= $ctsp['descripsion'] ?></p>
@@ -92,7 +87,7 @@
                         <button class="pview-buy-button btn button-hover-line tp_button" onclick="addCart(<?= $ctsp['product_id'] ?>)">
                             <span><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm vào giỏ hàng</span>
                         </button>
-                        <button class="pview-buy-button btn button-hover-line tp_button" id="buyButton" data-psId="<?= $ctsp['product_id'] ?>" data-psName="<?= $ctsp['product_name'] ?>" data-psPrice="<?= $ctsp['price'] ?>" data-psColor="<?= $ctsp['color'] ?>" data-psSize="<?= $ctsp['size'] ?>" data-psQuantity="1" data-ck="0">
+                        <button class="pview-buy-button btn button-hover-line tp_button" id="buyButton" data-psId="<?= $ctsp['product_id'] ?>" data-psName="<?= $ctsp['product_name'] ?>" data-psPrice="<?= $ctsp['price'] ?>"  data-psQuantity="1" data-ck="0">
                             <span>Mua hàng</span>
                         </button>
 

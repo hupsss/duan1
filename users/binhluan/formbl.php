@@ -108,9 +108,7 @@ $dsbl = load_comment($id_product)
                     saveComment(commentId);
 
                     // Load lại trang web
-                   $('#comments-list').load("users/binhluan/formbl.php", {
-                                id_product: 21
-                            });
+                    window.location.href = window.location.href;
                 }
             });
         });

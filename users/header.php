@@ -111,6 +111,16 @@
                                 sản phẩm
                             </div>
                         </div>
+                        <div id="cart" class="header-control-cart col-12 col-lg-5 d-flex align-items-center position-relative">
+                                <a href="?act=lichsumuahang&id=<?= $account_id?>" class="d-block col-9">
+                                    <div class="header-control-cart-content text-center">
+                                        <div class="header-control-cart-content-top">Lịch sử đơn hàng</div>
+                                        <div class="header-control-cart-content-top">
+                                            <i class="fa fa-history" aria-hidden="true"></i> <!-- Thêm biểu tượng FontAwesome cho lịch sử đơn hàng -->
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         <?php  }?>
                     </div>
                     <div class="header-main-control-mobile d-lg-none row col-2 position-relative" onclick="location.href = '/cart'">

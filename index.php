@@ -9,6 +9,7 @@ include "model/phong.php";
 include "model/checkout.php";
 include "mail/index.php";
 include "model/vnpay.php";
+include "model/giohang.php";
 
 $mail = new Mailer();
 ?>
@@ -205,8 +206,7 @@ $mail = new Mailer();
                     $size = getSizeFromProduct($id);
                     $material = getMaterialFromProduct($id);
                     $sanPhamBanChay =  productBanChay();
-                    // var_dump($color);
-                    // die;
+            
                     include_once "Users/danhsachdanhmuc.php";
                     break;
                     /*************************************************************************
@@ -223,14 +223,20 @@ $mail = new Mailer();
                         if (empty($fullName) || empty($password) || empty($email) || empty($tel)) {
                             $thongBao = "<div style='color:red'>Vui lòng điền đầy đủ thông tin.</div>";
                         } else {
-                            // Thử thêm tài khoản mới
-                            $result = add_account($fullName, $password, $email, $tel);
-                            // var_dump($result);
-                            // die;    
-                            if ($result) {
-                                $thongBao = "<div style='color:green'>Thêm thành công</div>";
+                            // Kiểm tra số điện thoại và mật khẩu
+                            if (!isValidPhoneNumber($tel)) {
+                                $thongBao = "<div style='color:red'>Số điện thoại không hợp lệ.</div>";
+                            } elseif (!isValidPassword($password)) {
+                                $thongBao = "<div style='color:red'>Mật khẩu phải chứa ít nhất 6 ký tự, 1 chữ in hoa và 1 số.</div>";
                             } else {
-                                $thongBao = "<div style='color:red'>Email đã tồn tại</div>";
+                                // Thử thêm tài khoản mới
+                                $result = add_account($fullName, $password, $email, $tel);
+                                
+                                if ($result) {
+                                    $thongBao = "<div style='color:green'>Thêm thành công</div>";
+                                } else {
+                                    $thongBao = "<div style='color:red'>Email đã tồn tại</div>";
+                                }
                             }
                         }
                     }
@@ -404,7 +410,7 @@ $mail = new Mailer();
                                 $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
                                 $vnp_OrderInfo = 'Nội dung thanh toán';
                                 $vnp_OrderType = 'billpayment';
-                                $vnp_Amount = 10000 * 100;
+                                $vnp_Amount = $total * 100;
                                 $vnp_Locale = 'vn';
                                 $vnp_BankCode = 'NCB';
                                 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -473,7 +479,7 @@ $mail = new Mailer();
                                 } else {
                                     echo json_encode($returnData);
                                 }
-                                // vui lòng tham khảo thêm tại code demo
+                                
                             }
                         }
                     }
@@ -519,6 +525,29 @@ $mail = new Mailer();
                         // payment_information($vnp_Amount, $vnp_BankCode, $vnp_BankTranNo, $vnp_CardType, $vnp_OrderInfo, $vnp_PayDate, $vnp_TmnCode, $vnp_TransactionNo, $order_id);
                     }
                     include "users/thank.php";
+                    break;
+                case "lichsumuahang":
+                    if(isset($_GET['id']) && ($_GET['id'] > 0)) {
+                        $id = $_GET['id'];
+                        $lsmh = loadAll_Order_user($id);
+                    }
+                    include "users/donhang/lichsumuahang.php";
+                    break;
+                case "chitietdonhang":
+                    if(isset($_GET['id']) && ($_GET['id'] > 0)) {
+                        $id = $_GET['id'];
+                        $ctdh = loadAll_Orderdetail_user($id);
+                    }
+                    include "users/donhang/chitietdonhang.php";
+                    break;
+                case "huydonhang":
+                    if(isset($_GET['id']) && ($_GET['id'] > 0)) {
+                        $id = $_GET['id'];
+                        huyDon($id);
+                    }
+                    header("location: ?act=lichsumuahang");
+                    $lsmh = loadAll_Order_user($_GET['id']);
+                    include "users/donhang/lichsumuahang.php";
                     break;
                 default:
                     include "users/main.php";
@@ -708,9 +737,7 @@ $mail = new Mailer();
             // Lấy giá trị số lượng từ ô input
             var psId = $('#buyButton').attr('data-psId');
             var psName = $('#buyButton').attr('data-psName');
-            var psPrice = $('#buyButton').attr('data-psPrice');
-            var psColor = $('#buyButton').attr('data-psColor');
-            var psSize = $('#buyButton').attr('data-psSize');
+            var psPrice = $('#buyButton').attr('data-psPrice');;
             var psQuantity = $('#buyButton').attr('data-psQuantity');
 
             $.ajax({
@@ -720,8 +747,6 @@ $mail = new Mailer();
                     psId:psId,
                     psName:psName,
                     psPrice:psPrice,
-                    psColor:psColor,
-                    psSize:psSize,
                     psQuantity:psQuantity
                 },
                 success: function(response) {

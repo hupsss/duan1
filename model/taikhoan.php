@@ -73,8 +73,28 @@
 
 
     function dele_account($id) {
-        $sql = "DELETE FROM account WHERE account_id=$id AND role = 0";
-        $result = pdo_execute($sql);
+        // Xóa chi tiết đơn hàng liên quan
+        $sqlDeleteOrderDetails = "DELETE FROM order_detail 
+                                 WHERE id_order IN (SELECT order_id FROM orders WHERE id_account = $id)";
+        pdo_execute($sqlDeleteOrderDetails);
+    
+        // Xóa payment_information liên quan
+        $sqlDeletePaymentInfo = "DELETE FROM payment_information 
+                                 WHERE order_id IN (SELECT order_id FROM orders WHERE id_account = $id)";
+        pdo_execute($sqlDeletePaymentInfo);
+    
+        // Xóa đơn hàng liên quan
+        $sqlDeleteOrders = "DELETE FROM orders WHERE id_account = $id";
+        pdo_execute($sqlDeleteOrders);
+    
+        // Xóa bình luận liên quan
+        $sqlDeleteComments = "DELETE FROM comment WHERE id_account = $id";
+        pdo_execute($sqlDeleteComments);
+    
+        // Xóa tài khoản
+        $sqlDeleteAccount = "DELETE FROM account WHERE account_id = $id AND role = 0";
+        $result = pdo_execute($sqlDeleteAccount);
+    
         return $result;
     }
 
@@ -88,5 +108,15 @@
         $sql = "UPDATE account SET password = '$password' Where email = '$email'";
         $result = pdo_execute($sql);
         return $result;
+    }
+    function isValidPhoneNumber($tel) {
+        // Số điện thoại Việt Nam có thể bắt đầu bằng +84 hoặc 0, tiếp theo là 9 hoặc 10 chữ số
+        $pattern = '/^(0|\+84)(9\d|1\d{2})\d{7}$/';
+        return preg_match($pattern, $tel);
+    }
+    function isValidPassword($password) {
+        // Mật khẩu phải chứa ít nhất 6 ký tự, 1 chữ in hoa và 1 số
+        $pattern = '/^(?=.*[A-Z])(?=.*\d).{6,}$/';
+        return preg_match($pattern, $password);
     }
 ?>

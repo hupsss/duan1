@@ -18,11 +18,6 @@
                                 echo '<span class="breadcrumb-item">' . $categoryName . '</span>';
                             }
                         ?>
-                    <?php 
-                    // var_dump($sp['category_name']);
-                    // die;
-                    ?>
-                  
                 </div>
             </div>
         </div>
@@ -202,7 +197,7 @@
                             <div class="row pagination">
                                     
                             </div>
-                            <ul class=""></ul>
+                            
                         </div>
                     </div>
                 </div>
